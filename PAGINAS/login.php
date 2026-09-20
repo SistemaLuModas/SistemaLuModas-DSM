@@ -1,3 +1,38 @@
+<?php
+    session_start();
+
+    include("../PHP/conexao.php");
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+            $usuario = $_POST["usuario"];
+            $senha = $_POST["senha"];
+            // Verificacao de adm
+            // Precisa alterar quando o BD for criado(verifica se e login de adm)
+            $bd_adm = "SELECT * FROM bd_usuario_adm WHERE usuario_adm = '$usuario' AND senha_adm = '$senha'";
+            $resultado_adm = mysqli_query($connect, $bd_adm);
+            
+                if (mysqli_num_rows($resultado_adm) == 1){
+                    $_SESSION["adm_logado"] = $usuario;
+                        // Manda para a tela de admin
+                        header("location: admin.php");
+                    exit;
+                }
+            // Verificacao de usuario comum
+            $bd_usuario = "SELECT * FROM bd_usuario WHERE usuario = '$usuario' AND senha = '$senha'";
+            $resultado_usuario = mysqli_query($connect, $bd_usuario);
+
+                if (mysqli_num_rows($resultado_usuario) == 1){
+                    $_SESSION["usuario_logado"] = $usuario;
+                        // Manda para o index
+                        header("location: ../index.php");
+                    exit;
+                }
+            else {
+                $erro = "Usuário ou senha incorretos...";
+            }    
+        }
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -45,28 +80,39 @@
 
 
     <main>
-
-        <!-- Banner da empresa -->
-        <section id="inicio" class="hero-section">
-            <div class="container">
-
-                <div class="row align-items-center min-vh-100">
-                    <div class="text-center">
-                        <h1> Faça seu login </h1> 
+    
+    <!-- Login  -->
+    <section id="inicio" class="hero-section min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="caixa-login p-4 rounded-3 shadow">
+                    
+                    <h3 class="mb-4 text-center">Faça seu login</h3>
+                        <form action="" method="post">
+                            <div class="mb-3">
+                            <label for="emailInput" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="emailInput" placeholder="nome@exemplo.com" name = "usuario">
                     </div>
+
+                        <div class="mb-3">
+                            <label for="senhaInput" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="senhaInput" placeholder="Digite sua senha" name = "senha">
+                        </div>
+
+                            <button type="submit" class="btnEnviar btn btn-light w-100 mt-3 fw-bold btnEnviar">ENTRAR</button>
+                        </form>
+                        <!-- Mensagem de erro php -->
+                        <div class = "col-12 text-center">
+                         <?php if(isset($erro)){ echo $erro;} ?>
+                         </div>
                     </div>
-
-                    <div class="col-lg-6 text-center mt-5 mt-lg-0">
-
-                    </div>
-
                 </div>
-
             </div>
-        </section>
+        </div>
 
-
-
+       
+    </section>
 
         <!-- Contato da moça -->
         <section id="contato" class="contact-section py-5">
@@ -167,10 +213,6 @@
         </div>
 
     </footer>
-
-    <button type="button" id="btnTopo" class="btn-topo" aria-label="Voltar ao topo">
-        <i class="bi bi-arrow-up"></i>
-    </button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>

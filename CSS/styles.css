@@ -326,6 +326,48 @@ body {
     color: #d9c8de;
 }
 
+/* CSS da ABA de LOGIN  */
+.caixa-login {
+    background-color: #ffffff !important; 
+    color: #2b1a3e !important; 
+    border-radius: 16px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important; 
+}
+
+
+.form-control {
+    border: 1.5px solid #e2d9f3;
+    background-color: #fcfaff;
+    transition: all 0.3s ease; 
+}
+
+.form-control:focus {
+    background-color: #ffffff;
+    border-color: var(--roxo-escuro);
+    box-shadow: 0 0 0 0.2rem rgba(106, 27, 154, 0.25); 
+}
+
+.btnEnviar {
+    border: none;
+    background-color: var(--roxo-escuro); 
+    color: var(--branco);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease; 
+}
+
+.btnEnviar:hover {
+    background-color: #521280;
+    color: var(--branco);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+}
+
+.btnEnviar:active {
+    transform: translateY(0); 
+}
+
 @media (max-width: 991px) {
     .navbar-collapse {
         padding: 15px 0;
