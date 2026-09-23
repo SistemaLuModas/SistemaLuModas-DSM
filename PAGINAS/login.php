@@ -9,7 +9,7 @@
             $senha = $_POST["senha"];
             // Verificacao de adm
             // Precisa alterar quando o BD for criado(verifica se e login de adm)
-            $bd_adm = "SELECT * FROM bd_usuario_adm WHERE usuario_adm = '$usuario' AND senha_adm = '$senha'";
+            $bd_adm = "SELECT * FROM clientes WHERE id = '2' AND email = '$usuario' AND senha = '$senha'";
             $resultado_adm = mysqli_query($connect, $bd_adm);
             
                 if (mysqli_num_rows($resultado_adm) == 1){
@@ -19,7 +19,7 @@
                     exit;
                 }
             // Verificacao de usuario comum
-            $bd_usuario = "SELECT * FROM bd_usuario WHERE usuario = '$usuario' AND senha = '$senha'";
+            $bd_usuario = "SELECT * FROM clientes WHERE email = '$usuario' AND senha = '$senha'";
             $resultado_usuario = mysqli_query($connect, $bd_usuario);
 
                 if (mysqli_num_rows($resultado_usuario) == 1){
