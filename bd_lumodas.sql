@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS Lumodas;
 USE Lumodas;
 
-CREATE TABLE clientes (
+CREATE TABLE IF NOT EXISTS clientes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     cpf CHAR(11) NOT NULL UNIQUE,
@@ -9,7 +9,7 @@ CREATE TABLE clientes (
     senha VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE produtos (
+CREATE TABLE IF NOT EXISTS produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE produtos (
     imagem_url VARCHAR(255)
     );
 
-CREATE TABLE vendas (
+CREATE TABLE IF NOT EXISTS vendas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT NOT NULL,
     data_venda TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -28,7 +28,7 @@ CREATE TABLE vendas (
     FOREIGN KEY (cliente_id) REFERENCES clientes(id)
 );
 
-CREATE TABLE itens_venda (
+CREATE TABLE IF NOT EXISTS itens_venda (
     id INT AUTO_INCREMENT PRIMARY KEY,
     venda_id INT NOT NULL,
     produto_id INT NOT NULL,
