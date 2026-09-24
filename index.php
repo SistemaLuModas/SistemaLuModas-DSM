@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -57,8 +58,17 @@
                                 Ver coleção
                             </a>
                         </li>
-                        <li class="nav-item pad" style="padding-left: 60px;">
-                            <a class="nav-link" href="PAGINAS/login.php">👤   Entre ou Cadastre-se</a>
+                        <li class="nav-item pad" style="padding-left: 60px; color: #FFFFFF;">
+
+                            <!-- Verifica se o usuario tá logado e troca o header da página -->
+                            <?php if (isset($_SESSION["usuario_logado"])) { ?>
+                                <i class="bi bi-person-circle" style="color: #FFFFFF;"></i>
+                                <!-- Aqui é só pra mostrar o primeiro nome -->
+                                Olá, <strong style="color: #FFFFFF";><?php echo explode(" ", $_SESSION["nome_usuario"])[0]; ?></strong>
+                                | <a href="PAGINAS/logout.php" style="color: #aeaeae;" >Sair</a>
+                            <?php } else { ?>
+                                <a href="PAGINAS/login.php" style="color: #FFFFFF; text-decoration: none;">👤   Entre ou cadastre-se</a>
+                            <?php } ?>
                         </li>
 
                     </ul>
