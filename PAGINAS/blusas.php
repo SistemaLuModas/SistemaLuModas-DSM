@@ -33,16 +33,16 @@
 
                 <div class="collapse navbar-collapse" id="menuPrincipal">
                     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-                        <li class="nav-item pad" style="padding-left: 60px; color: #FFFFFF;">
+                       <li class="nav-item pad" style="padding-left: 60px; color: #FFFFFF;">
 
                             <!-- Verifica se o usuario tá logado e troca o header da página -->
                             <?php if (isset($_SESSION["usuario_logado"])) { ?>
                                 <i class="bi bi-person-circle" style="color: #FFFFFF;"></i>
                                 <!-- Aqui é só pra mostrar o primeiro nome -->
                                 Olá, <strong style="color: #FFFFFF";><?php echo explode(" ", $_SESSION["nome_usuario"])[0]; ?></strong>
-                                | <a href="PAGINAS/logout.php" style="color: #aeaeae;" >Sair</a>
+                                | <a href="logout.php" style="color: #aeaeae;" >Sair</a>
                             <?php } else { ?>
-                                <a href="PAGINAS/login.php" style="color: #FFFFFF; text-decoration: none;">👤   Entre ou cadastre-se</a>
+                                <a href="login.php" style="color: #FFFFFF; text-decoration: none;">👤   Entre ou cadastre-se</a>
                             <?php } ?>
                         </li>
 

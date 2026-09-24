@@ -40,9 +40,9 @@
                                 <i class="bi bi-person-circle" style="color: #FFFFFF;"></i>
                                 <!-- Aqui é só pra mostrar o primeiro nome -->
                                 Olá, <strong style="color: #FFFFFF";><?php echo explode(" ", $_SESSION["nome_usuario"])[0]; ?></strong>
-                                | <a href="PAGINAS/logout.php" style="color: #aeaeae;" >Sair</a>
+                                | <a href="logout.php" style="color: #aeaeae;" >Sair</a>
                             <?php } else { ?>
-                                <a href="PAGINAS/login.php" style="color: #FFFFFF; text-decoration: none;">👤   Entre ou cadastre-se</a>
+                                <a href="login.php" style="color: #FFFFFF; text-decoration: none;">👤   Entre ou cadastre-se</a>
                             <?php } ?>
                         </li>
 
