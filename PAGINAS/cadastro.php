@@ -86,7 +86,6 @@
         </nav>
     </header>
        
-    <!-- A página vai ficar toda feia, apenas estou implantando o CRUD, boa sorte Front-end -->
         
     <!-- Cadastro  -->
     <section id="inicio" class="hero-section min-vh-100 d-flex align-items-center justify-content-center">
