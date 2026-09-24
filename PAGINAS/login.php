@@ -48,7 +48,13 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
         <!-- NÃO MEXA NISSO, FOI O QUE QUEBROU O CÓDIGO DA ULTIMA VEZ-->
-        <link rel="stylesheet" href="../CSS/styles.css">
+        <link rel="stylesheet" href="../CSS/login.css">
+        <link rel="stylesheet" href="../CSS/navbar.css">
+        <link rel="stylesheet" href="../CSS/configuracoes_globais.css">
+        <link rel="stylesheet" href="../CSS/contatos.css">
+        <link rel="stylesheet" href="../CSS/introducao.css">
+        <link rel="stylesheet" href="../CSS/footer.css">
+
         <link rel="icon" type="../imagens/png" href="../imagens/logo.png">
     </head>
     <body>
