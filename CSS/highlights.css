@@ -1,0 +1,22 @@
+.highlights { 
+  background: var(--branco); 
+} 
+
+.highlight-card { 
+  padding: 30px 20px; 
+} 
+
+.highlight-card i { 
+  font-size: 2.2rem; 
+  color: var(--roxo-principal); 
+} 
+
+.highlight-card h3 { 
+  margin-top: 15px; 
+  font-size: 1.3rem; 
+} 
+
+.highlight-card p { 
+  color: var(--cinza); 
+  margin-bottom: 0; 
+} 

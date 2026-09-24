@@ -9,7 +9,7 @@
             $senha = $_POST["senha"];
             // Verificacao de adm
             // Precisa alterar quando o BD for criado(verifica se e login de adm)
-            $bd_adm = "SELECT * FROM bd_usuario_adm WHERE usuario_adm = '$usuario' AND senha_adm = '$senha'";
+            $bd_adm = "SELECT * FROM clientes WHERE id = '2' AND email = '$usuario' AND senha = '$senha'";
             $resultado_adm = mysqli_query($connect, $bd_adm);
             
                 if (mysqli_num_rows($resultado_adm) == 1){
@@ -19,17 +19,20 @@
                     exit;
                 }
             // Verificacao de usuario comum
-            $bd_usuario = "SELECT * FROM bd_usuario WHERE usuario = '$usuario' AND senha = '$senha'";
+            $bd_usuario = "SELECT * FROM clientes WHERE email = '$usuario' AND senha = '$senha'";
             $resultado_usuario = mysqli_query($connect, $bd_usuario);
 
+                // Mudei aqui pra poder mostrar o nome nas outras páginas
                 if (mysqli_num_rows($resultado_usuario) == 1){
+                    $linha = mysqli_fetch_assoc($resultado_usuario);
                     $_SESSION["usuario_logado"] = $usuario;
+                    $_SESSION["nome_usuario"] = $linha["nome"];
                         // Manda para o index
                         header("location: ../index.php");
                     exit;
                 }
             else {
-                $erro = "Usuário ou senha incorretos...";
+                $erro = "Usuário ou senha incorretos...<br><br>";
             }    
         }
 ?>
@@ -68,7 +71,7 @@
                 <div class="collapse navbar-collapse" id="menuPrincipal">
                     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
                         <li class="nav-item pad" style="padding-left: 60px;">
-                            <a class="nav-link" href="login.php">👤   Entre ou Cadastre-se</a>
+                            <a class="nav-link" href="login.php"style="color: #FFFFFF; text-decoration: none;">👤   Entre ou Cadastre-se</a>
                         </li>
 
                     </ul>
@@ -106,6 +109,11 @@
                         <div class = "col-12 text-center">
                          <?php if(isset($erro)){ echo $erro;} ?>
                          </div>
+                         <?php if (isset($_GET["cadastro"])) { ?>
+                            <div class="alert alert-success">Cadastro feito! Faça seu login.</div>
+                        <?php } ?>
+                        <a href="cadastro.php" style="color: #000000; text-decoration: none;"> Não tem conta? Cadastre-se</a>
+                         
                     </div>
                 </div>
             </div>

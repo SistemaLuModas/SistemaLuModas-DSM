@@ -1,0 +1,35 @@
+:root { 
+  /* Paleta de cores  */
+  --roxo-principal: #681184; 
+  --roxo-escuro: #43065a; 
+  --roxo-claro: #8d42a3; 
+  --lilas: #f4eafa; 
+  --branco: #ffffff; 
+  --texto: #2f2035; 
+  --cinza: #75697a; 
+} 
+
+html { 
+  scroll-behavior: smooth; /* Rolagem  ao clicar em links  */
+  scroll-padding-top: 85px; /* Para o topo da seção não ficar escondido sob a navbar fixa */
+} 
+
+body { 
+  margin: 0; 
+  font-family: "Segoe UI", Arial, sans-serif; 
+  color: var(--texto); 
+  background: var(--branco); 
+  animation: aparecer 2s ease; /* Animação para carregar a página */
+} 
+
+/* fade-in subida */
+@keyframes aparecer { 
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  } 
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  } 
+} 

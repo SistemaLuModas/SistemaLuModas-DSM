@@ -1,0 +1,31 @@
+.about-section { 
+  background: #fff; 
+} 
+
+.about-logo-wrapper { 
+  background: var(--lilas); 
+  border-radius: 30px; 
+  padding: 35px; 
+} 
+
+.about-logo { 
+  width: 100%; 
+  max-width: 360px; 
+  border-radius: 20px; 
+} 
+
+.about-section p { 
+  color: var(--cinza); 
+  line-height: 1.8; 
+} 
+
+.about-item { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  font-weight: 500; 
+} 
+
+.about-item i { 
+  color: var(--roxo-principal); 
+}

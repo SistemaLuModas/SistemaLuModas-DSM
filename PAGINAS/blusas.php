@@ -1,4 +1,5 @@
-<html>
+<?php session_start(); ?>
+<!DOCTYPE html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,16 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
         <!-- NÃO MEXA NISSO, FOI O QUE QUEBROU O CÓDIGO DA ULTIMA VEZ-->
-        <link rel="stylesheet" href="../CSS/styles.css">
+        <link rel="stylesheet" href="../CSS/configuracoes_globais.css">
+        <link rel="stylesheet" href="../CSS/navbar.css">
+        <link rel="stylesheet" href="../CSS/introducao.css">
+        <link rel="stylesheet" href="../CSS/highlights.css">
+        <link rel="stylesheet" href="../CSS/categorias.css">
+        <link rel="stylesheet" href="../CSS/contatos.css">
+        <link rel="stylesheet" href="../CSS/footer.css">
+        <link rel="stylesheet" href="../CSS/about.css">
+        <link rel="stylesheet" href="../CSS/login.css">
+        <link rel="stylesheet" href="../CSS/media_queries.css">
         <link rel="icon" type="../imagens/png" href="../imagens/logo.png">
     </head>
     <body>
@@ -32,8 +42,17 @@
 
                 <div class="collapse navbar-collapse" id="menuPrincipal">
                     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-                        <li class="nav-item pad" style="padding-left: 60px;">
-                            <a class="nav-link" href="login.php">👤   Entre ou Cadastre-se</a>
+                        <li class="nav-item pad" style="padding-left: 60px; color: #FFFFFF;">
+
+                            <!-- Verifica se o usuario tá logado e troca o header da página -->
+                            <?php if (isset($_SESSION["usuario_logado"])) { ?>
+                                <i class="bi bi-person-circle" style="color: #FFFFFF;"></i>
+                                <!-- Aqui é só pra mostrar o primeiro nome -->
+                                Olá, <strong style="color: #FFFFFF";><?php echo explode(" ", $_SESSION["nome_usuario"])[0]; ?></strong>
+                                | <a href="PAGINAS/logout.php" style="color: #aeaeae;" >Sair</a>
+                            <?php } else { ?>
+                                <a href="PAGINAS/login.php" style="color: #FFFFFF; text-decoration: none;">👤   Entre ou cadastre-se</a>
+                            <?php } ?>
                         </li>
 
                     </ul>

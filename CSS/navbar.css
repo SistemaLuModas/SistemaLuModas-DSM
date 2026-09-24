@@ -1,0 +1,30 @@
+.navbar { 
+  background: rgba(67, 6, 90, 0.97); 
+  padding: 8px 0; 
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12); 
+} 
+
+.logo { 
+  width: 145px; 
+  height: 60px; 
+  object-fit: contain; /* Mantém a proporção do logo sem distorcer */
+  background: transparent; 
+} 
+
+.nav-link { 
+  color: #fff !important; 
+  font-weight: 500; 
+  transition: 0.3s; 
+} 
+
+.nav-link:hover, 
+.nav-link.active { 
+  color: #e9c9f2 !important; 
+} 
+
+.btn-nav { 
+  color: var(--roxo-escuro); 
+  font-weight: 600; 
+  border-radius: 30px; 
+  padding: 8px 18px; 
+} 

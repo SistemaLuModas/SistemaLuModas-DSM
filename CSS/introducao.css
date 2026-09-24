@@ -1,0 +1,75 @@
+.hero-section { 
+  background: radial-gradient(circle at 80% 30%, rgba(255,255,255,0.12), transparent 30%), 
+              linear-gradient(135deg, var(--roxo-escuro), var(--roxo-principal)); 
+  color: var(--branco); 
+} 
+
+.badge-custom { 
+  display: inline-block; 
+  padding: 8px 15px; 
+  border: 1px solid rgba(255,255,255,0.5); 
+  border-radius: 30px; 
+  font-size: 0.8rem; 
+  letter-spacing: 2px; 
+  margin-bottom: 20px; 
+} 
+
+.hero-section h1 { 
+  font-size: clamp(2.8rem, 6vw, 5rem); /* Fonte responsiva automatizada */
+  font-weight: 700; 
+  line-height: 1.05; 
+  margin-bottom: 25px; 
+} 
+
+.hero-section h1 span { 
+  color: #e5bbed; 
+} 
+
+.hero-section .lead { 
+  max-width: 580px; 
+  line-height: 1.8; 
+  color: #f5eafa; 
+} 
+
+/* Botões da Seção Hero */
+.btn-primary { 
+  background-color: var(--branco); 
+  border-color: var(--branco); 
+  color: var(--roxo-escuro); 
+  font-weight: 600; 
+  border-radius: 30px; 
+  padding: 12px 25px; 
+} 
+
+.btn-primary:hover { 
+  background-color: #ead4ef; 
+  border-color: #ead4ef; 
+  color: var(--roxo-escuro); 
+} 
+
+.btn-outline-light { 
+  border-radius: 30px; 
+  font-weight: 600; 
+  padding: 12px 25px; 
+} 
+
+/* Card da Logotipo no Hero */
+.hero-logo-card { 
+  width: min(430px, 90%); 
+  aspect-ratio: 1; /* Mantém o card perfeitamente quadrado para o border-radius criar o círculo */
+  margin: auto; 
+  border-radius: 50%; 
+  background: #fff; 
+  padding: 25px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  box-shadow: 0 25px 70px rgba(0,0,0,0.25); 
+} 
+
+.hero-logo { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; 
+  border-radius: 50%; 
+} 

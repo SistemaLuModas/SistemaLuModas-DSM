@@ -1,0 +1,26 @@
+/* Ajustes para Tablets e telas menores (Desktops pequenos) */
+@media (max-width: 991px) { 
+  .navbar-collapse { 
+    padding: 15px 0; 
+  } 
+  .hero-section { 
+    padding-top: 75px; 
+  } 
+} 
+
+/* Ajustes finos para telas mobile */
+@media (max-width: 575px) { 
+  .logo { 
+    width: 120px; 
+    height: 50px; 
+  } 
+  .hero-logo-card { 
+    width: 280px; 
+  } 
+  .hero-section h1 { 
+    font-size: 2.7rem; /* Reduz o tamanho máximo do título em telas mini */
+  } 
+  .contact-box { 
+    padding: 45px 20px; 
+  } 
+}

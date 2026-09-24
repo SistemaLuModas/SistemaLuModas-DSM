@@ -1,0 +1,80 @@
+.collection-section { 
+  background: var(--lilas); 
+} 
+
+.section-heading { 
+  margin-bottom: 45px; 
+} 
+
+.section-heading span, 
+.section-label, 
+.contact-box > span { 
+  color: var(--roxo-principal); 
+  font-size: 0.8rem; 
+  letter-spacing: 3px; 
+  font-weight: 700; 
+} 
+
+.section-heading h2, 
+.about-section h2, 
+.contact-box h2 { 
+  font-size: clamp(2rem, 4vw, 3rem); 
+  font-weight: 700; 
+  margin: 10px 0; 
+} 
+
+.section-heading p { 
+  color: var(--cinza); 
+} 
+
+/* Grid do Cards de Categorias */
+.category-card { 
+  background: var(--branco); 
+  border-radius: 18px; 
+  overflow: hidden; 
+  height: 100%; 
+  box-shadow: 0 10px 30px rgba(67, 6, 90, 0.08); 
+  transition: transform 0.3s, box-shadow 0.3s; /* Transição suave para o efeito de hover */
+} 
+
+.category-card:hover { 
+  transform: translateY(-8px); /* Card sobe levemente no hover */
+  box-shadow: 0 18px 35px rgba(67, 6, 90, 0.15); 
+} 
+
+.category-image { 
+  height: 190px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: white; 
+  font-size: 3.5rem; 
+} 
+
+.vestidos  { background: linear-gradient(135deg, #6d1689, #a65fba); } 
+.blusas    { background: linear-gradient(135deg, #52106c, #87429d); } 
+.conjuntos { background: linear-gradient(135deg, #7d2a96, #bd80ca); } 
+.acessorios{ background: linear-gradient(135deg, #43065a, #74118f); } 
+
+.category-content { 
+  padding: 22px; 
+} 
+
+.category-content h3 { 
+  font-size: 1.3rem; 
+  margin-bottom: 5px; 
+} 
+
+.category-content p { 
+  color: var(--cinza); 
+} 
+
+.category-content a { 
+  color: var(--roxo-principal); 
+  text-decoration: none; 
+  font-weight: 600; 
+} 
+
+.category-content a:hover { 
+  color: var(--roxo-escuro); 
+} 

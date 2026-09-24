@@ -1,0 +1,20 @@
+.contact-section { 
+  background: var(--lilas); 
+} 
+
+.contact-box { 
+  background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo-principal)); 
+  color: white; 
+  border-radius: 30px; 
+  padding: 65px 25px; 
+  box-shadow: 0 20px 50px rgba(67, 6, 90, 0.18); 
+} 
+
+.contact-box > span { 
+  color: #e8c4ef; 
+} 
+
+.contact-box p { 
+  color: #f4eafa; 
+  margin-bottom: 30px; 
+} 

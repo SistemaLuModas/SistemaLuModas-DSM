@@ -1,0 +1,17 @@
+.footer { 
+  background: #30043f; 
+  color: #eee; 
+} 
+
+.footer-logo { 
+  width: 120px; 
+  height: 50px; 
+  object-fit: contain; 
+  background: white; 
+  border-radius: 5px; 
+} 
+
+.footer p { 
+  font-size: 0.9rem; 
+  color: #d9c8de; 
+} 
