@@ -58,7 +58,7 @@
                             </a>
                         </li>
                         <li class="nav-item pad" style="padding-left: 60px;">
-                            <a class="nav-link" href="HTML/login.html">👤   Entre ou Cadastre-se</a>
+                            <a class="nav-link" href="PAGINAS/login.php">👤   Entre ou Cadastre-se</a>
                         </li>
 
                     </ul>
@@ -210,7 +210,7 @@
 
                                 <p>Delicados e elegantes.</p>
 
-                                <a href="vestidos.html">
+                                <a href="PAGINAS/vestidos.php">
                                     Ver peças
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
@@ -236,7 +236,7 @@
 
                                 <p>Para compor vários looks.</p>
 
-                                <a href="blusas.html">
+                                <a href="PAGINAS/blusas.php">
                                     Ver peças
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
@@ -263,7 +263,7 @@
 
                                 <p>Praticidade com estilo.</p>
 
-                                <a href="conjuntos.html">
+                                <a href="PAGINAS/conjuntos.php">
                                     Ver peças
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
@@ -289,7 +289,7 @@
 
                                 <p>Detalhes que fazem a diferença.</p>
 
-                                <a href="acessorios.html">
+                                <a href="PAGINAS/acessorios.php">
                                     Ver peças
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
@@ -450,10 +450,6 @@
                         </div>
 
                     </form>
-
-                    <p class="form-success-message" id="mensagemSucesso" role="status" aria-live="polite">
-                        Mensagem enviada! Em breve alguém da Lu Moda vai te responder.
-                    </p>
 
                 </div>
 
