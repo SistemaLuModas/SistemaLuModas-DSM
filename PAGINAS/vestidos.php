@@ -42,7 +42,7 @@
 
                 <div class="collapse navbar-collapse" id="menuPrincipal">
                     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-                       <li class="nav-item pad" style="padding-left: 60px; color: #FFFFFF;">
+                        <li class="nav-item pad" style="padding-left: 60px; color: #FFFFFF;">
 
                             <!-- Verifica se o usuario tá logado e troca o header da página -->
                             <?php if (isset($_SESSION["usuario_logado"])) { ?>
@@ -62,133 +62,67 @@
         </nav>
     </header>
 
-
-    <main>
-
-        <!-- Banner da empresa -->
-        <section id="inicio" class="hero-section">
-            <div class="container">
-
-                <div class="row align-items-center min-vh-100">
-                    <div class="text-center">
-                        <h1> Vestidos </h1> 
+    <main class="container my-5 pt-5">
+        <h2 class="text-center mb-4">Destaques da Semana</h2>
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            
+            <!-- Card 1 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../imagens/azul.jpeg" class="card-img-top" alt="Vestido Azul" style="object-fit: cover; height: 280px;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-truncate">Vestido Azul Elegante</h5>
+                        <p class="card-text text-muted small">Perfeito para ocasiões especiais.</p>
+                        <h6 class="mt-auto text-success fw-bold">R$ 129,90</h6>
+                        <a href="#" class="btn btn-dark w-100 mt-2"><i class="bi bi-cart-plus me-2"></i>Comprar</a>
                     </div>
-                    </div>
-
-                    <div class="col-lg-6 text-center mt-5 mt-lg-0">
-
-                    </div>
-
                 </div>
-
-            </div>
-        </section>
-
-
-
-
-        <!-- Contato da moça -->
-        <section id="contato" class="contact-section py-5">
-
-            <div class="container">
-
-                <div class="contact-box text-center">
-
-                    <span>FALE COM A LU MODA</span>
-
-                    <h2>
-                        Gostou de algum look?
-                    </h2>
-
-                    <p>
-                        Entre em contato e descubra nossas peças disponíveis.
-                    </p>
-
-
-                    <div class="d-flex justify-content-center gap-3 flex-wrap mb-5">
-
-                        <a href="https://chat.whatsapp.com/G7AgsUbjkBy5aiS4tPpKp6" target="_blank" rel="noopener" class="btn btn-light btn-lg">
-                            <i class="bi bi-whatsapp"></i>
-                            WhatsApp
-                        </a>
-
-                        <a href="https://www.instagram.com/lumodas2.0?stkn=ZDNlZDc0MzIxNw%3D%3D" target="_blank" rel="noopener" class="btn btn-outline-light btn-lg">
-                            <i class="bi bi-instagram"></i>
-                            Instagram
-                        </a>
-
-                    </div>
-
-                    <form class="contact-form mx-auto needs-validation" id="formContato" novalidate>
-
-                        <div class="row g-3 text-start">
-
-                            <div class="col-md-6">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
-                                <div class="invalid-feedback">Digite seu nome.</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="voce@email.com" required>
-                                <div class="invalid-feedback">Digite um e-mail válido.</div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="mensagem" class="form-label">Mensagem</label>
-                                <textarea class="form-control" id="mensagem" name="mensagem" rows="4" placeholder="Conte pra gente o que você procura" required></textarea>
-                                <div class="invalid-feedback">Escreva uma mensagem.</div>
-                            </div>
-
-                            <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-light btn-lg px-5">Enviar mensagem</button>
-                            </div>
-
-                        </div>
-
-                    </form>
-
-
-                </div>
-
             </div>
 
-        </section>
-
-    </main>
-
-
-    <!-- Fim da PG -->
-    <footer class="footer py-4">
-
-        <div class="container">
-
-            <div class="row align-items-center g-3">
-
-                <div class="col-md-6 text-center text-md-start">
-
-                    <address class="m-0">
-                        Lu Moda &middot; Moda para toda família
-                    </address>
-
+            <!-- Card 2 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../imagens/cinza.jpeg" class="card-img-top" alt="Casaco Cinza" style="object-fit: cover; height: 280px;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-truncate">Blusa de Frio Cinza</h5>
+                        <p class="card-text text-muted small">Conforto e estilo para o dia a dia.</p>
+                        <h6 class="mt-auto text-success fw-bold">R$ 89,90</h6>
+                        <a href="#" class="btn btn-dark w-100 mt-2"><i class="bi bi-cart-plus me-2"></i>Comprar</a>
+                    </div>
                 </div>
+            </div>
 
-                <div class="col-md-6 text-center text-md-end">
-
-                    <p class="m-0">
-                        &copy; <span id="anoAtual">2026</span> Lu Moda. Todos os direitos reservados.
-                    </p>
-
+            <!-- Card 3 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../imagens/rosa.jpeg" class="card-img-top" alt="Produto 3" style="object-fit: cover; height: 280px;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-truncate">Produto Exemplo 3</h5>
+                        <p class="card-text text-muted small">Breve descrição do produto da loja.</p>
+                        <h6 class="mt-auto text-success fw-bold">R$ 59,90</h6>
+                        <a href="#" class="btn btn-dark w-100 mt-2"><i class="bi bi-cart-plus me-2"></i>Comprar</a>
+                    </div>
                 </div>
+            </div>
 
+            <!-- Card 4 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../imagens/verde.jpeg" class="card-img-top" alt="Produto 4" style="object-fit: cover; height: 280px;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-truncate">Produto Exemplo 4</h5>
+                        <p class="card-text text-muted small">Breve descrição do produto da loja.</p>
+                        <h6 class="mt-auto text-success fw-bold">R$ 79,90</h6>
+                        <a href="#" class="btn btn-dark w-100 mt-2"><i class="bi bi-cart-plus me-2"></i>Comprar</a>
+                    </div>
+                </div>
             </div>
 
         </div>
+    </main>
 
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
-    </body>
+    
+    <script src="https://jsdelivr.net"></script>
+</body>
 </html>
