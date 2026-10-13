@@ -37,3 +37,7 @@ CREATE TABLE IF NOT EXISTS itens_venda (
     FOREIGN KEY (venda_id) REFERENCES vendas(id) ON DELETE CASCADE,
     FOREIGN KEY (produto_id) REFERENCES produtos(id)
 );
+
+INSERT INTO clientes (nome, cpf, email, senha) VALUES 
+("DevTools","67699935506","devtools@gmail.com","devtools"),
+("Lumodas","58899906674","lumodas@gmail.com","admin");
