@@ -70,7 +70,7 @@
             <!-- Card 1 -->
             <div class="col">
                 <div class="card h-100 shadow-sm">
-                    <img src="../imagens/azul.jpeg" class="card-img-top" alt="Vestido Azul" style="object-fit: cover; height: 280px;">
+                    <img src="../imagens/vestidos/azul.jpeg" class="card-img-top" alt="Vestido Azul" style="object-fit: cover; height: 280px;">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-truncate">Vestido Azul Elegante</h5>
                         <p class="card-text text-muted small">Perfeito para ocasiões especiais.</p>
@@ -83,7 +83,7 @@
             <!-- Card 2 -->
             <div class="col">
                 <div class="card h-100 shadow-sm">
-                    <img src="../imagens/cinza.jpeg" class="card-img-top" alt="Casaco Cinza" style="object-fit: cover; height: 280px;">
+                    <img src="../imagens/vestidos/cinza.jpeg" class="card-img-top" alt="Casaco Cinza" style="object-fit: cover; height: 280px;">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-truncate">Blusa de Frio Cinza</h5>
                         <p class="card-text text-muted small">Conforto e estilo para o dia a dia.</p>
@@ -96,7 +96,7 @@
             <!-- Card 3 -->
             <div class="col">
                 <div class="card h-100 shadow-sm">
-                    <img src="../imagens/rosa.jpeg" class="card-img-top" alt="Produto 3" style="object-fit: cover; height: 280px;">
+                    <img src="../imagens/vestidos/rosa.jpeg" class="card-img-top" alt="Produto 3" style="object-fit: cover; height: 280px;">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-truncate">Produto Exemplo 3</h5>
                         <p class="card-text text-muted small">Breve descrição do produto da loja.</p>
@@ -109,7 +109,7 @@
             <!-- Card 4 -->
             <div class="col">
                 <div class="card h-100 shadow-sm">
-                    <img src="../imagens/verde.jpeg" class="card-img-top" alt="Produto 4" style="object-fit: cover; height: 280px;">
+                    <img src="../imagens/vestidos/verde.jpeg" class="card-img-top" alt="Produto 4" style="object-fit: cover; height: 280px;">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-truncate">Produto Exemplo 4</h5>
                         <p class="card-text text-muted small">Breve descrição do produto da loja.</p>
