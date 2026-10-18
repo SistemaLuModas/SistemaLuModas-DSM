@@ -97,7 +97,7 @@
 
                     <div class="col-lg-6 text-center text-lg-start">
 
-                        <span class="badge-custom">MODA UNISSEX</span>
+                        <span class="badge-custom">MODA FEMININA</span>
 
                         <h1>
                             Seu estilo, sua <span>essência.</span>
