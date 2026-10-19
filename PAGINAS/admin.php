@@ -22,9 +22,9 @@
         "image/jpeg" => "jpg",
         "image/png"  => "png",
         "image/webp" => "webp",
-        ];
+    ];
 
-    function  e($valor): string
+    function e($valor): string
     {
         return htmlspecialchars((string) $valor, ENT_QUOTES, "UTF-8");
     }
@@ -32,9 +32,9 @@
     function csrf_token(): string
     {
         if (empty($_SESSION["csrf"])) {
-        $_SESSION["csrf"] = bin2hex(random_bytes(32));
-    }
-    return $_SESSION["csrf"];
+            $_SESSION["csrf"] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION["csrf"];
     }
     
     function csrf_valido(): bool
@@ -55,143 +55,234 @@
     
     $erros = [];
     $form  = ["nome" => "", "preco" => "", "quantidade" => "0", "descricao" => ""];
-    
+    $produto_editando = null;
+
+    // ===== PROCESSAMENTO DO FORMULÁRIO (POST) =====
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
  
-    if (!csrf_valido()) {
-        http_response_code(403);
-        exit("Requisição inválida (token expirado ou arquivo grande demais). Volte e tente novamente.");
-    }
+        if (!csrf_valido()) {
+            http_response_code(403);
+            exit("Requisição inválida (token expirado ou arquivo grande demais). Volte e tente novamente.");
+        }
  
-    $acao = $_POST["acao"] ?? "";
+        $acao = $_POST["acao"] ?? "";
 
-    // ===== ADICIONAR PRODUTO =====
-    if ($acao === "adicionar") {
-        $form["nome"]       = trim($_POST["nome"] ?? "");
-        $form["preco"]      = trim($_POST["preco"] ?? "");
-        $form["quantidade"] = trim($_POST["quantidade"] ?? "0");
-        $form["descricao"]  = trim($_POST["descricao"] ?? "");
+        // ===== ADICIONAR PRODUTO =====
+        if ($acao === "adicionar") {
+            $form["nome"]       = trim($_POST["nome"] ?? "");
+            $form["preco"]      = trim($_POST["preco"] ?? "");
+            $form["quantidade"] = trim($_POST["quantidade"] ?? "0");
+            $form["descricao"]  = trim($_POST["descricao"] ?? "");
 
-    if ($form["nome"] === "" || mb_strlen($form["nome"]) > 100) {
-        $erros[] = "Informe um nome de até 100 caracteres.";
-        }
+            if ($form["nome"] === "" || mb_strlen($form["nome"]) > 100) {
+                $erros[] = "Informe um nome de até 100 caracteres.";
+            }
 
-    // Preço (aceita 49,90 ou 49.90)
-        $preco = filter_var(str_replace(",", ".", $form["preco"]), FILTER_VALIDATE_FLOAT);
-        if ($preco === false || $preco < 0 || $preco > 99999999.99) {
-            $erros[] = "Informe um preço válido (ex.: 49,90).";
-        }
+            // Preço (aceita 49,90 ou 49.90)
+            $preco = filter_var(str_replace(",", ".", $form["preco"]), FILTER_VALIDATE_FLOAT);
+            if ($preco === false || $preco < 0 || $preco > 99999999.99) {
+                $erros[] = "Informe um preço válido (ex.: 49,90).";
+            }
 
-    // Estoque
-        $quantidade = filter_var($form["quantidade"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 0]]);
-        if ($quantidade === false) {
-            $erros[] = "A quantidade em estoque deve ser um número inteiro maior ou igual a 0.";
-        }
+            // Estoque
+            $quantidade = filter_var($form["quantidade"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 0]]);
+            if ($quantidade === false) {
+                $erros[] = "A quantidade em estoque deve ser um número inteiro maior ou igual a 0.";
+            }
 
-    // Imagem (deixei opcional)
-        $imagem_url  = null;
-        $nome_final  = null;
-        $arquivo_tmp = null;
+            // Imagem (deixei opcional)
+            $imagem_url  = null;
+            $nome_final  = null;
+            $arquivo_tmp = null;
 
-    if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] !== UPLOAD_ERR_NO_FILE) {
-            $img = $_FILES["imagem"];
- 
-            if ($img["error"] !== UPLOAD_ERR_OK) {
-                $erros[] = "Não foi possível enviar a imagem (código " . (int) $img["error"] . ").";
-            } elseif ($img["size"] > TAMANHO_MAX_IMG) {
-                $erros[] = "A imagem deve ter no máximo 2 MB.";
-            } else {
-                // Confere o tipo real do arquivo (não confia na extensão)
-                $mime = (new finfo(FILEINFO_MIME_TYPE))->file($img["tmp_name"]);
-                if (!isset(TIPOS_IMG[$mime])) {
-                    $erros[] = "Formato de imagem não permitido. Use JPG, PNG ou WEBP.";
+            if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] !== UPLOAD_ERR_NO_FILE) {
+                $img = $_FILES["imagem"];
+     
+                if ($img["error"] !== UPLOAD_ERR_OK) {
+                    $erros[] = "Não foi possível enviar a imagem (código " . (int) $img["error"] . ").";
+                } elseif ($img["size"] > TAMANHO_MAX_IMG) {
+                    $erros[] = "A imagem deve ter no máximo 2 MB.";
                 } else {
-                    $nome_final  = bin2hex(random_bytes(8)) . "." . TIPOS_IMG[$mime];
-                    $arquivo_tmp = $img["tmp_name"];
-                    $imagem_url  = PASTA_IMAGENS_URL . $nome_final;
+                                    // Confere o tipo real do arquivo (não confia na extensão)
+                    $mime = (new finfo(FILEINFO_MIME_TYPE))->file($img["tmp_name"]);
+                    if (!isset(TIPOS_IMG[$mime])) {
+                        $erros[] = "Formato de imagem não permitido. Use JPG, PNG ou WEBP.";
+                    } else {
+                        $nome_final  = bin2hex(random_bytes(8)) . "." . TIPOS_IMG[$mime];
+                        $arquivo_tmp = $img["tmp_name"];
+                        $imagem_url  = PASTA_IMAGENS_URL . $nome_final;
+                    }
                 }
             }
-        }
 
-
-        if (!$erros) {
-            // Move a imagem para a pasta definitiva
-            if ($arquivo_tmp !== null) {
-                if (!is_dir(PASTA_IMAGENS_FS)) {
-                    mkdir(PASTA_IMAGENS_FS, 0755, true);
-                }
-                if (!move_uploaded_file($arquivo_tmp, PASTA_IMAGENS_FS . $nome_final)) {
-                    $erros[]    = "Falha ao salvar a imagem no servidor (verifique as permissões da pasta).";
-                    $imagem_url = null;
+            if (!$erros) {
+                // Move a imagem para a pasta definitiva
+                if ($arquivo_tmp !== null) {
+                    if (!is_dir(PASTA_IMAGENS_FS)) {
+                        mkdir(PASTA_IMAGENS_FS, 0755, true);
+                    }
+                    if (!move_uploaded_file($arquivo_tmp, PASTA_IMAGENS_FS . $nome_final)) {
+                        $erros[]    = "Falha ao salvar a imagem no servidor (verifique as permissões da pasta).";
+                        $imagem_url = null;
+                    }
                 }
             }
-        }
  
-        if (!$erros) {
+            if (!$erros) {
+                try {
+                    $sql  = "INSERT INTO produtos (nome, preco, quantidade_estoque, descricao, imagem_url)
+                             VALUES (?, ?, ?, ?, ?)";
+                    $stmt = mysqli_prepare($connect, $sql);
+                    $preco_txt = number_format($preco, 2, ".", "");
+                    mysqli_stmt_bind_param($stmt, "ssiss", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $imagem_url);
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_close($stmt);
+ 
+                    voltar("success", "Produto \"" . $form["nome"] . "\" adicionado ao catálogo.");
+                } catch (mysqli_sql_exception $ex) {
+                    // Se o INSERT falhou, apaga a imagem que acabou de ser enviada
+                if ($nome_final !== null && is_file(PASTA_IMAGENS_FS . $nome_final)) {
+                        unlink(PASTA_IMAGENS_FS . $nome_final);
+                    }
+                    $erros[] = "Erro ao salvar no banco de dados.";
+                }
+            }
+        }
+
+        // ===== ATUALIZAR PRODUTO =====
+        if ($acao === "atualizar") {
+            $id = filter_var($_POST["id"] ?? "", FILTER_VALIDATE_INT);
+            if ($id === false || $id < 1) {
+                voltar("danger", "Produto inválido.");
+            }
+
+            $form["nome"]       = trim($_POST["nome"] ?? "");
+            $form["preco"]      = trim($_POST["preco"] ?? "");
+            $form["quantidade"] = trim($_POST["quantidade"] ?? "0");
+            $form["descricao"]  = trim($_POST["descricao"] ?? "");
+
+            if ($form["nome"] === "" || mb_strlen($form["nome"]) > 100) {
+                $erros[] = "Informe um nome de até 100 caracteres.";
+            }
+
+            $preco = filter_var(str_replace(",", ".", $form["preco"]), FILTER_VALIDATE_FLOAT);
+            if ($preco === false || $preco < 0 || $preco > 99999999.99) {
+                $erros[] = "Informe um preço válido (ex.: 49,90).";
+            }
+
+            $quantidade = filter_var($form["quantidade"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 0]]);
+            if ($quantidade === false) {
+                $erros[] = "A quantidade em estoque deve ser um número inteiro maior ou igual a 0.";
+            }
+
+            if (!$erros) {
+                try {
+                    $preco_txt = number_format($preco, 2, ".", "");
+
+                    // Trata envio de nova imagem se houver
+                    if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] !== UPLOAD_ERR_NO_FILE) {
+                        $img = $_FILES["imagem"];
+                        if ($img["error"] === UPLOAD_ERR_OK && $img["size"] <= TAMANHO_MAX_IMG) {
+                            $mime = (new finfo(FILEINFO_MIME_TYPE))->file($img["tmp_name"]);
+                            if (isset(TIPOS_IMG[$mime])) {
+                                $nome_final = bin2hex(random_bytes(8)) . "." . TIPOS_IMG[$mime];
+                                if (move_uploaded_file($img["tmp_name"], PASTA_IMAGENS_FS . $nome_final)) {
+                                    $imagem_url = PASTA_IMAGENS_URL . $nome_final;
+                                    
+                                    // Atualiza com a imagem nova
+                                    $sql = "UPDATE produtos SET nome = ?, preco = ?, quantidade_estoque = ?, descricao = ?, imagem_url = ? WHERE id = ?";
+                                    $stmt = mysqli_prepare($connect, $sql);
+                                    mysqli_stmt_bind_param($stmt, "ssissi", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $imagem_url, $id);
+                                    mysqli_stmt_execute($stmt);
+                                    mysqli_stmt_close($stmt);
+
+                                    voltar("success", "Produto \"" . $form["nome"] . "\" atualizado com sucesso!");
+                                }
+                            }
+                        }
+                    }
+
+                    // Se não enviou imagem nova, atualiza apenas os dados de texto
+                    $sql = "UPDATE produtos SET nome = ?, preco = ?, quantidade_estoque = ?, descricao = ? WHERE id = ?";
+                    $stmt = mysqli_prepare($connect, $sql);
+                    mysqli_stmt_bind_param($stmt, "ssisi", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $id);
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_close($stmt);
+
+                    voltar("success", "Produto \"" . $form["nome"] . "\" atualizado com sucesso!");
+                } catch (mysqli_sql_exception $ex) {
+                    $erros[] = "Erro ao atualizar produto no banco de dados.";
+                }
+            }
+        }
+
+        // ===== REMOVER PRODUTO =====
+        if ($acao === "remover") {
+            $id = filter_var($_POST["id"] ?? "", FILTER_VALIDATE_INT);
+ 
+            if ($id === false || $id < 1) {
+                voltar("danger", "Produto inválido.");
+            }
+ 
             try {
-                $sql  = "INSERT INTO produtos (nome, preco, quantidade_estoque, descricao, imagem_url)
-                         VALUES (?, ?, ?, ?, ?)";
-                $stmt = mysqli_prepare($connect, $sql);
-                $preco_txt = number_format($preco, 2, ".", "");
-                mysqli_stmt_bind_param($stmt, "ssiss", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $imagem_url);
+                $stmt = mysqli_prepare($connect, "SELECT nome, imagem_url FROM produtos WHERE id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $id);
+                mysqli_stmt_execute($stmt);
+                $produto = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+                mysqli_stmt_close($stmt);
+ 
+                if (!$produto) {
+                    voltar("warning", "Esse produto não existe mais.");
+                }
+ 
+                $stmt = mysqli_prepare($connect, "DELETE FROM produtos WHERE id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $id);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
  
-                voltar("success", "Produto \"" . $form["nome"] . "\" adicionado ao catálogo.");
-            } catch (mysqli_sql_exception $ex) {
-                // Se o INSERT falhou, apaga a imagem que acabou de ser enviada
-                if ($nome_final !== null && is_file(PASTA_IMAGENS_FS . $nome_final)) {
-                    unlink(PASTA_IMAGENS_FS . $nome_final);
+                if (!empty($produto["imagem_url"])) {
+                    $arquivo = PASTA_IMAGENS_FS . basename($produto["imagem_url"]);
+                    if (is_file($arquivo)) {
+                        unlink($arquivo);
+                    }
                 }
-                $erros[] = "Erro ao salvar no banco de dados.";
+ 
+                voltar("success", "Produto \"" . $produto["nome"] . "\" removido do catálogo.");
+            } catch (mysqli_sql_exception $ex) {
+                // 1451 = existe venda ligada a esse produto (chave estrangeira em itens_venda)
+
+                if ((int) $ex->getCode() === 1451) {
+                    voltar(
+                        "warning",
+                        "Esse produto já foi vendido e não pode ser excluído (isso apagaria o histórico de vendas). " .
+                        "Para tirá-lo da loja, zere o estoque dele."
+                    );
+                }
+                voltar("danger", "Erro ao remover o produto.");
             }
         }
     }
 
-    // ===== REMOVER PRODUTO =====
-    if ($acao === "remover") {
-        $id = filter_var($_POST["id"] ?? "", FILTER_VALIDATE_INT);
- 
-        if ($id === false || $id < 1) {
-            voltar("danger", "Produto inválido.");
-        }
- 
-        try {
-            $stmt = mysqli_prepare($connect, "SELECT nome, imagem_url FROM produtos WHERE id = ?");
-            mysqli_stmt_bind_param($stmt, "i", $id);
+    // ===== BUSCAR PRODUTO PARA EDICAO (REQUISIÇÃO GET) =====
+    if (isset($_GET["editar"])) {
+        $id_editar = filter_var($_GET["editar"], FILTER_VALIDATE_INT);
+        if ($id_editar && $id_editar > 0) {
+            $stmt = mysqli_prepare($connect, "SELECT * FROM produtos WHERE id = ?");
+            mysqli_stmt_bind_param($stmt, "i", $id_editar);
             mysqli_stmt_execute($stmt);
-            $produto = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+            $res = mysqli_stmt_get_result($stmt);
+            $produto_editando = mysqli_fetch_assoc($res);
             mysqli_stmt_close($stmt);
- 
-            if (!$produto) {
-                voltar("warning", "Esse produto não existe mais.");
+
+            if ($produto_editando) {
+                $form = [
+                    "nome"       => $produto_editando["nome"],
+                    "preco"      => str_replace(".", ",", $produto_editando["preco"]),
+                    "quantidade" => $produto_editando["quantidade_estoque"],
+                    "descricao"  => $produto_editando["descricao"]
+                ];
             }
- 
-            $stmt = mysqli_prepare($connect, "DELETE FROM produtos WHERE id = ?");
-            mysqli_stmt_bind_param($stmt, "i", $id);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
- 
-            if (!empty($produto["imagem_url"])) {
-                $arquivo = PASTA_IMAGENS_FS . basename($produto["imagem_url"]);
-                if (is_file($arquivo)) {
-                    unlink($arquivo);
-                }
-            }
- 
-            voltar("success", "Produto \"" . $produto["nome"] . "\" removido do catálogo.");
-        } catch (mysqli_sql_exception $ex) {
-            // 1451 = existe venda ligada a esse produto (chave estrangeira em itens_venda)
-            if ((int) $ex->getCode() === 1451) {
-                voltar(
-                    "warning",
-                    "Esse produto já foi vendido e não pode ser excluído (isso apagaria o histórico de vendas). " .
-                    "Para tirá-lo da loja, zere o estoque dele."
-                );
-            }
-            voltar("danger", "Erro ao remover o produto.");
         }
-    }
     }
     
     // ---------- Dados para a tela ----------
@@ -204,11 +295,10 @@
             $sem_estoque++;
         }
     }
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -227,7 +317,7 @@
     <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/media_queries.css">
 
-    <title>Admin | Lu Moda</title>
+    <title>Admin | Lu Modas</title>
 </head>
 <body>
     
@@ -237,16 +327,14 @@
                        display: flex; align-items: center; justify-content: center; color: #adb5bd; }
         .descricao { max-width: 280px; }
     </style>
-</head>
-<body>
- 
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
 
                 <a class="navbar-brand d-flex align-items-center" href="../index.php"
-                    aria-label="Lu Moda - início">
-                    <img src="../imagens/logo.png" alt="Logo Lu Moda" class="logo">
+                    aria-label="Lu Modas - início">
+                    <img src="../imagens/logo.png" alt="Logo Lu Modas" class="logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -317,15 +405,19 @@
         </div>
     </div>
  
-    <!-- Formulário: novo produto -->
+    <!-- Formulário: adicionar/editar produto -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white fw-bold">
-            <i class="bi bi-plus-circle"></i> Adicionar produto
+            <i class="bi bi-<?= $produto_editando ? 'pencil-square' : 'plus-circle' ?>"></i>
+            <?= $produto_editando ? 'Editar produto' : 'Adicionar produto' ?>
         </div>
         <div class="card-body">
             <form method="post" enctype="multipart/form-data" class="row g-3">
                 <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
-                <input type="hidden" name="acao" value="adicionar">
+                <input type="hidden" name="acao" value="<?= $produto_editando ? 'atualizar' : 'adicionar' ?>">
+                <?php if ($produto_editando): ?>
+                    <input type="hidden" name="id" value="<?= (int) $produto_editando['id'] ?>">
+                <?php endif; ?>
  
                 <div class="col-md-6">
                     <label for="nome" class="form-label">Nome</label>
@@ -358,8 +450,11 @@
  
                 <div class="col-12">
                     <button type="submit" class="btn btn-dark">
-                        <i class="bi bi-check-lg"></i> Salvar produto
+                        <i class="bi bi-check-lg"></i> <?= $produto_editando ? 'Atualizar produto' : 'Salvar produto' ?>
                     </button>
+                    <?php if ($produto_editando): ?>
+                        <a href="admin.php" class="btn btn-outline-secondary ms-2">Cancelar</a>
+                    <?php endif; ?>
                 </div>
             </form>
         </div>
@@ -409,6 +504,10 @@
                             </td>
                             <td class="descricao text-muted small text-truncate"><?= e($p["descricao"]) ?></td>
                             <td class="text-end">
+                                <a href="admin.php?editar=<?= (int) $p["id"] ?>" class="btn btn-outline-primary btn-sm me-1">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </a>
+
                                 <form method="post" class="d-inline"
                                       onsubmit="return confirm('Remover «<?= e(addslashes($p["nome"])) ?>» do catálogo?');">
                                     <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
@@ -430,8 +529,5 @@
 </main>
  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
 </body>
 </html>
