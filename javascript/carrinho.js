@@ -103,6 +103,21 @@ document.addEventListener('click', function (clique) {
 
     if (btn) {
         clique.preventDefault();
+        if (typeof usuarioLogado === 'undefined' || !usuarioLogado) {
+            Swal.fire({
+                icon: 'info',
+                title: 'Faça login para adicionar ao carrinho',
+                confirmButtonText: 'Entrar',
+                background: '#2b1b36',
+                color: '#F4F4F4'
+            }).then(() => {
+                const base = window.location.pathname.includes('/PAGINAS/') ? '' : 'PAGINAS/';
+                window.location.href = base + 'login.php';
+            });
+            return;
+        }
+
+
         let produtoCLicado = null;
 
         // tive que criar isso pois no index os cards de catalogo nao existem, logo tive que criar pelo pesquisa.php os dados que o botao precisa puxar quando esta no index

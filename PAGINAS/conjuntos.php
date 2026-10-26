@@ -118,6 +118,10 @@ $produtos = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
     </main>
     
      <script>
+
+        // verfica se o usuário está logado para add um item ao carrinho
+        const usuarioLogado = <?= isset($_SESSION['usuario_logado']) ? 'true' : 'false' ?>;
+
         // essa parte cria uma variavel no php e atribui ela ao nome e email do usuario cadastrado
         <?php 
             $nomeUsuario = '';

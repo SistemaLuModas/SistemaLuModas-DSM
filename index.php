@@ -524,10 +524,12 @@ include("./PHP/conexao.php");
     </footer>
     
      <script>
+
+        // verfica se o usuário está logado para add um item ao carrinho
+        const usuarioLogado = <?= isset($_SESSION['usuario_logado']) ? 'true' : 'false' ?>;
+
     <?php 
-
         
-
         $sqlNoIndex = "SELECT * FROM produtos LIMIT 10";
 
         // conexao com o bd
@@ -545,6 +547,9 @@ include("./PHP/conexao.php");
 
             }
         }
+
+
+
         // parte para puxar os dados do login e mandar para o zap
         $nomeUsuario = '';
 
@@ -563,6 +568,7 @@ include("./PHP/conexao.php");
             }
       ?>
         // manda os dados do cliente para o zap 
+
 
         const dadosCliente = {
 
