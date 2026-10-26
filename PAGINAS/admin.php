@@ -54,7 +54,7 @@
     unset($_SESSION["flash"]);
     
     $erros = [];
-    $form  = ["nome" => "", "preco" => "", "quantidade" => "0", "descricao" => ""];
+    $form  = ["nome" => "", "preco" => "", "quantidade" => "0", "descricao" => "", "categoria" => ""];
     $produto_editando = null;
 
     // ===== PROCESSAMENTO DO FORMULÁRIO (POST) =====
@@ -73,9 +73,15 @@
             $form["preco"]      = trim($_POST["preco"] ?? "");
             $form["quantidade"] = trim($_POST["quantidade"] ?? "0");
             $form["descricao"]  = trim($_POST["descricao"] ?? "");
+            $form["categoria"]  = trim($_POST["categoria"] ?? "");
 
             if ($form["nome"] === "" || mb_strlen($form["nome"]) > 100) {
                 $erros[] = "Informe um nome de até 100 caracteres.";
+            }
+
+            //só aceita as 4 definidas em CATEGORIAS
+            if (!array_key_exists($form["categoria"], CATEGORIAS)) {
+                $erros[] = "Escolha uma categoria.";
             }
 
             // Preço (aceita 49,90 ou 49.90)
@@ -103,7 +109,7 @@
                 } elseif ($img["size"] > TAMANHO_MAX_IMG) {
                     $erros[] = "A imagem deve ter no máximo 2 MB.";
                 } else {
-                                    // Confere o tipo real do arquivo (não confia na extensão)
+                                   
                     $mime = (new finfo(FILEINFO_MIME_TYPE))->file($img["tmp_name"]);
                     if (!isset(TIPOS_IMG[$mime])) {
                         $erros[] = "Formato de imagem não permitido. Use JPG, PNG ou WEBP.";
@@ -130,11 +136,11 @@
  
             if (!$erros) {
                 try {
-                    $sql  = "INSERT INTO produtos (nome, preco, quantidade_estoque, descricao, imagem_url)
-                             VALUES (?, ?, ?, ?, ?)";
+                    $sql  = "INSERT INTO produtos (nome, preco, quantidade_estoque, descricao, categoria, imagem_url)
+                             VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = mysqli_prepare($connect, $sql);
                     $preco_txt = number_format($preco, 2, ".", "");
-                    mysqli_stmt_bind_param($stmt, "ssiss", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $imagem_url);
+                    mysqli_stmt_bind_param($stmt, "ssisss", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $form["categoria"], $imagem_url);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_close($stmt);
  
@@ -160,9 +166,14 @@
             $form["preco"]      = trim($_POST["preco"] ?? "");
             $form["quantidade"] = trim($_POST["quantidade"] ?? "0");
             $form["descricao"]  = trim($_POST["descricao"] ?? "");
+            $form["categoria"]  = trim($_POST["categoria"] ?? "");
 
             if ($form["nome"] === "" || mb_strlen($form["nome"]) > 100) {
                 $erros[] = "Informe um nome de até 100 caracteres.";
+            }
+
+            if (!array_key_exists($form["categoria"], CATEGORIAS)) {
+                $erros[] = "Escolha uma categoria.";
             }
 
             $preco = filter_var(str_replace(",", ".", $form["preco"]), FILTER_VALIDATE_FLOAT);
@@ -190,9 +201,9 @@
                                     $imagem_url = PASTA_IMAGENS_URL . $nome_final;
                                     
                                     // Atualiza com a imagem nova
-                                    $sql = "UPDATE produtos SET nome = ?, preco = ?, quantidade_estoque = ?, descricao = ?, imagem_url = ? WHERE id = ?";
+                                    $sql = "UPDATE produtos SET nome = ?, preco = ?, quantidade_estoque = ?, descricao = ?, categoria = ?, imagem_url = ? WHERE id = ?";
                                     $stmt = mysqli_prepare($connect, $sql);
-                                    mysqli_stmt_bind_param($stmt, "ssissi", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $imagem_url, $id);
+                                    mysqli_stmt_bind_param($stmt, "ssisssi", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $form["categoria"], $imagem_url, $id);
                                     mysqli_stmt_execute($stmt);
                                     mysqli_stmt_close($stmt);
 
@@ -203,9 +214,9 @@
                     }
 
                     // Se não enviou imagem nova, atualiza apenas os dados de texto
-                    $sql = "UPDATE produtos SET nome = ?, preco = ?, quantidade_estoque = ?, descricao = ? WHERE id = ?";
+                    $sql = "UPDATE produtos SET nome = ?, preco = ?, quantidade_estoque = ?, descricao = ?, categoria = ? WHERE id = ?";
                     $stmt = mysqli_prepare($connect, $sql);
-                    mysqli_stmt_bind_param($stmt, "ssisi", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $id);
+                    mysqli_stmt_bind_param($stmt, "ssissi", $form["nome"], $preco_txt, $quantidade, $form["descricao"], $form["categoria"], $id);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_close($stmt);
 
@@ -213,6 +224,11 @@
                 } catch (mysqli_sql_exception $ex) {
                     $erros[] = "Erro ao atualizar produto no banco de dados.";
                 }
+            }
+
+            // Se deu erro, continua na tela de edição (senão o formulário viraria "Adicionar")
+            if ($erros) {
+                $produto_editando = ["id" => $id];
             }
         }
 
@@ -279,7 +295,8 @@
                     "nome"       => $produto_editando["nome"],
                     "preco"      => str_replace(".", ",", $produto_editando["preco"]),
                     "quantidade" => $produto_editando["quantidade_estoque"],
-                    "descricao"  => $produto_editando["descricao"]
+                    "descricao"  => $produto_editando["descricao"],
+                    "categoria"  => $produto_editando["categoria"]
                 ];
             }
         }
@@ -289,6 +306,10 @@
     $resultado = mysqli_query($connect, "SELECT * FROM produtos ORDER BY id DESC");
     $produtos  = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     $total     = count($produtos);
+    $por_categoria = [];
+    foreach ($produtos as $p) {
+        $por_categoria[$p["categoria"]] = ($por_categoria[$p["categoria"]] ?? 0) + 1;
+    }
     $sem_estoque = 0;
     foreach ($produtos as $p) {
         if ((int) $p["quantidade_estoque"] === 0) {
@@ -437,6 +458,41 @@
                            value="<?= e($form["quantidade"]) ?>" required>
                 </div>
  
+                <!-- Categoria: accordion (abrir uma categoria = selecioná-la) -->
+                <div class="col-12">
+                    <label class="form-label d-block">
+                        Categoria <span class="text-muted small">— clique na categoria para selecioná-la</span>
+                    </label>
+                    <input type="hidden" name="categoria" id="categoria" value="<?= e($form["categoria"]) ?>">
+
+                    <div class="accordion" id="accCategorias">
+                        <?php foreach (CATEGORIAS as $chave => $rotulo):
+                            $sel = ($form["categoria"] === $chave);
+                            $qtd = (int) ($por_categoria[$chave] ?? 0);
+                        ?>
+                            <div class="accordion-item" data-categoria="<?= e($chave) ?>">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button <?= $sel ? "" : "collapsed" ?>" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#cat-<?= e($chave) ?>"
+                                            aria-expanded="<?= $sel ? "true" : "false" ?>" aria-controls="cat-<?= e($chave) ?>">
+                                        <?= e($rotulo) ?>
+                                        <i class="bi bi-check-circle-fill text-success ms-2 check-cat <?= $sel ? "" : "d-none" ?>"></i>
+                                    </button>
+                                </h2>
+                                <div id="cat-<?= e($chave) ?>" class="accordion-collapse collapse <?= $sel ? "show" : "" ?>"
+                                     data-bs-parent="#accCategorias">
+                                    <div class="accordion-body small text-muted">
+                                        Hoje essa categoria tem <?= $qtd ?> produto<?= $qtd === 1 ? "" : "s" ?>.
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="text-danger small mt-1 d-none" id="erroCategoria">
+                        Escolha uma categoria antes de salvar.
+                    </div>
+                </div>
+
                 <div class="col-12">
                     <label for="descricao" class="form-label">Descrição</label>
                     <textarea class="form-control" id="descricao" name="descricao" rows="3"><?= e($form["descricao"]) ?></textarea>
@@ -476,6 +532,7 @@
                             <th>Foto</th>
                             <th>#</th>
                             <th>Nome</th>
+                            <th>Categoria</th>
                             <th>Preço</th>
                             <th>Estoque</th>
                             <th>Descrição</th>
@@ -494,6 +551,7 @@
                             </td>
                             <td><?= (int) $p["id"] ?></td>
                             <td class="fw-semibold"><?= e($p["nome"]) ?></td>
+                            <td><span class="badge text-bg-secondary"><?= e(CATEGORIAS[$p["categoria"]] ?? $p["categoria"]) ?></span></td>
                             <td>R$ <?= number_format((float) $p["preco"], 2, ",", ".") ?></td>
                             <td>
                                 <?php if ((int) $p["quantidade_estoque"] === 0): ?>
@@ -529,5 +587,37 @@
 </main>
  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Abrir um item do accordion = escolher aquela categoria
+    (function () {
+        var campo = document.getElementById("categoria");
+        var aviso = document.getElementById("erroCategoria");
+        var itens = document.querySelectorAll("#accCategorias .accordion-item");
+
+        function marcar(chave) {
+            campo.value = chave;
+            aviso.classList.add("d-none");
+            itens.forEach(function (item) {
+                var ativo = item.dataset.categoria === chave;
+                item.querySelector(".check-cat").classList.toggle("d-none", !ativo);
+            });
+        }
+
+        itens.forEach(function (item) {
+            item.querySelector(".accordion-collapse").addEventListener("show.bs.collapse", function () {
+                marcar(item.dataset.categoria);
+            });
+        });
+
+        // Não deixa salvar sem categoria
+        campo.form.addEventListener("submit", function (ev) {
+            if (campo.value === "") {
+                ev.preventDefault();
+                aviso.classList.remove("d-none");
+                aviso.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        });
+    })();
+</script>
 </body>
 </html>

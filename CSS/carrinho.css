@@ -1,0 +1,127 @@
+html, body {
+    width: 100%;
+    overflow-x: hidden; 
+}
+
+.btnCarrinho {
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+.btnCarrinho i{
+    padding: 30px;
+    font-size: 2.0rem;
+}
+
+.btnCarrinho i:hover{
+    color: rgb(255, 161, 255);
+}
+
+.carrinho-gaveta {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    z-index: 1050;
+    overflow-y: auto;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.carrinho-gaveta.ativo {
+    transform: translateX(0%);
+}
+
+.carrinho-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040; 
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.carrinho-overlay.ativo {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+
+
+.carrinho-cabecalho {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.carrinho-cabecalho h5 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.carrinho-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+
+
+
+.btn-fechar {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.btn-finalizar:hover {
+    background-color: #000000;
+}
+
+
+
+
+.carrinho-corpo {
+    flex: 1; 
+    overflow-y: auto; 
+    padding: 20px;
+}
+
+.carrinho-rodape {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    background-color: #ffffff;
+    
+    flex-shrink: 0; 
+}
+
+.btn-finalizar {
+    width: 100%;
+    padding: 12px;
+    background-color: #212529;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}

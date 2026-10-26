@@ -27,6 +27,7 @@
                     $linha = mysqli_fetch_assoc($resultado_usuario);
                     $_SESSION["usuario_logado"] = $usuario;
                     $_SESSION["nome_usuario"] = $linha["nome"];
+                    $_SESSION["email_usuario"] = $linha["email"];
                         // Manda para o index
                         header("location: ../index.php");
                     exit;

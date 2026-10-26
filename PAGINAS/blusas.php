@@ -1,4 +1,17 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+include("../PHP/conexao.php");
+include('./estruturaCarrinho.php');
+$categoria = "blusas";
+
+$stmt = mysqli_prepare($connect, "SELECT * FROM produtos WHERE categoria = ? ORDER BY id DESC");
+mysqli_stmt_bind_param($stmt, "s", $categoria);
+mysqli_stmt_execute($stmt);
+$produtos = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);  
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -22,6 +35,7 @@
         <link rel="stylesheet" href="../CSS/login.css">
         <link rel="stylesheet" href="../CSS/media_queries.css">
         <link rel="icon" type="image/png" href="../imagens/logo.png">
+        <link rel="stylesheet" href="../CSS/carrinho.css">
     </head>
     <body>
 
@@ -55,50 +69,47 @@
                         </li>
                     </ul>
                 </div>
-
+                <button class = "btnCarrinho" id = "btnCarrinho" ><i class="bi bi-handbag-fill"></i></button>
             </div>
         </nav>
     </header>
 
-    <?php
-    // Cada linha é um card 
-    // Para add as imagem precisam estar na pasta imagens/blusas/
-    $produtos = [
-        ["nome" => "Blazer",            "descricao" => "Perfeito para ocasiões especiais.",   "preco" => "129,90", "imagem" => "blazer.jpeg"],
-        ["nome" => "Blusa Manga Longa",          "descricao" => "Conforto e estilo para o dia a dia.", "preco" => "89,90",  "imagem" => "blusa_manga_longa.jpeg"],
-        ["nome" => "Camisa Amarela",          "descricao" => "Breve descrição do produto da loja.", "preco" => "59,90",  "imagem" => "camisa_amarela.jpeg"],
-        ["nome" => "Camisa Azul Amarela",            "descricao" => "Breve descrição do produto da loja.", "preco" => "79,90",  "imagem" => "camisa_azul_amarela.jpeg"],
-        ["nome" => "Camisa Azul Listrada",        "descricao" => "Otimo para festas.", "preco" => "67,90",  "imagem" => "camisa_azul_listrada.jpeg"],
-        ["nome" => "Camisa de Couro",                "descricao" => "Breve descrição do produto da loja.", "preco" => "86,90",  "imagem" => "camisa_de_couro.jpeg"],
-        ["nome" => "Camisa Oversized Rosa",        "descricao" => "Breve descrição do produto da loja.", "preco" => "42,90",  "imagem" => "camisa_oversized_rosa.jpeg"],
-        ["nome" => "Camisa Oversized",         "descricao" => "Breve descrição do produto da loja.", "preco" => "88,90",  "imagem" => "camisa_oversized.jpeg"],
-        ["nome" => "Camisa Preta",       "descricao" => "Breve descrição do produto da loja.", "preco" => "60,90",  "imagem" => "camisa_preta.jpeg"],
-        ["nome" => "Camisa Social Branca",         "descricao" => "Breve descrição do produto da loja.", "preco" => "99,90",  "imagem" => "camisa_social_branca.jpeg"],
-        ["nome" => "Camisa Social",                "descricao" => "Breve descrição do produto da loja.", "preco" => "134,90",  "imagem" => "camisa_social.jpeg"],
-        ["nome" => "Camiseta Manga Longa",         "descricao" => "Breve descrição do produto da loja.", "preco" => "96,90",  "imagem" => "camiseta_manga_longa.jpeg"],
-        ["nome" => "Cardigan",     "descricao" => "Breve descrição do produto da loja.", "preco" => "34,90",  "imagem" => "cardigan.jpeg"],
-        ["nome" => "Casaco Cinza", "descricao" => "Breve descrição do produto da loja.", "preco" => "80,90",  "imagem" => "casaco_cinza.jpeg"],
-        ["nome" => "Casaco Jeans","descricao" => "Breve descrição do produto da loja.", "preco" => "79,90",  "imagem" => "casaco_jeans.jpeg"],
-        ["nome" => "Casaco Marrom",         "descricao" => "Breve descrição do produto da loja.", "preco" => "89,90",  "imagem" => "casaco_marrom.jpeg"],
-    ];
-    ?>
-
     <main class="container my-5 pt-5">
-        <h2 class="text-center mb-4">Destaques da Semana</h2>
+        <h2 class="text-center mb-4"><?= htmlspecialchars(CATEGORIAS[$categoria]) ?></h2>
+
+        <?php if (!$produtos) { ?>
+            <p class="text-center text-muted">Nenhum produto cadastrado nesta categoria ainda.</p>
+        <?php } ?>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-            <?php foreach ($produtos as $p) { ?>
+            <!-- produtos é o dicioanrio total, posicao e o indice dele na volta e o item atual é o item da vez -->
+             <!-- coloquei cada informacao pelo item atual do foreach -->
+                <!-- no final e colocado o indice do botao, para no js ele puxar qual indice ouve o clicque e pegar todos os elementos dele -->
+            <?php foreach ($produtos as $posicao => $itemAtual) {
+                $esgotado = (int) $itemAtual['quantidade_estoque'] === 0;
+            ?>
                 <div class="col">
                     <div class="card h-100 shadow-sm">
-                        <img src="../imagens/blusas/<?php echo htmlspecialchars($p['imagem']); ?>"
-                             class="card-img-top"
-                             alt="<?php echo htmlspecialchars($p['nome']); ?>"
-                             style="object-fit: cover; height: 280px;">
+                        <?php if (!empty($itemAtual['imagem_url'])) { ?>
+                            <img src="../<?= htmlspecialchars($itemAtual['imagem_url']) ?>"
+                                 class="card-img-top <?= $esgotado ? 'opacity-50' : '' ?>"
+                                 alt="<?= htmlspecialchars($itemAtual['nome']) ?>"
+                                 style="object-fit: cover; height: 280px;">
+                        <?php } else { ?>
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center text-secondary"
+                                 style="height: 280px;">
+                                <i class="bi bi-image fs-1"></i>
+                            </div>
+                        <?php } ?>
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-truncate"><?php echo htmlspecialchars($p['nome']); ?></h5>
-                            <p class="card-text text-muted small"><?php echo htmlspecialchars($p['descricao']); ?></p>
-                            <h6 class="mt-auto text-success fw-bold">R$ <?php echo htmlspecialchars($p['preco']); ?></h6>
-                            <a href="#" class="btn btn-dark w-100 mt-2"><i class="bi bi-cart-plus me-2"></i>Comprar</a>
+                            <h5 class="card-title text-truncate"><?= htmlspecialchars($itemAtual['nome']) ?></h5>
+                            <p class="card-text text-muted small"><?= htmlspecialchars($itemAtual['descricao'] ?? '') ?></p>
+                            <h6 class="mt-auto text-success fw-bold">R$ <?= number_format((float) $itemAtual['preco'], 2, ',', '.') ?></h6>
+                            <?php if ($esgotado) { ?>
+                                <button class="btn btn-secondary w-100 mt-2" disabled>Esgotado</button>
+                            <?php } else { ?>
+                                <a href="#" class="btn btn-dark w-100 mt-2 btn btnComprar" data-id = "<?php echo $posicao ?>"><i class="bi bi-cart-plus me-2"></i>Comprar</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -106,6 +117,32 @@
         </div>
     </main>
 
+    <script>
+        // essa parte cria uma variavel no php e atribui ela ao nome e email do usuario cadastrado
+        <?php 
+            $nomeUsuario = '';
+            if (isset($_SESSION['nome_usuario'])){
+                $nomeUsuario = $_SESSION['nome_usuario'];
+            }
+        
+            $emailUsuario = '';
+            if (isset($_SESSION['email_usuario'])){
+                $emailUsuario = $_SESSION['email_usuario'];
+            }
+        ?>
+        // coloca dentro de um objeto para puxar na mensagem do zapzap
+        const dadosCliente = {
+            nome: "<?php echo $nomeUsuario; ?>",
+            email : "<?php echo $emailUsuario; ?>"
+        }   
+        // converte o antigo dicionario (ou onde estao as infos) em  js
+        const produtosJS = <?php echo json_encode($produtos); ?>;
+    </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../javascript/carrinho.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../javascript/whatsap.js"></script>
 </body>
 </html>

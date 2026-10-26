@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include("./PAGINAS/estruturaCarrinho.php");
+include("./PHP/conexao.php");
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -22,7 +25,8 @@
         <link rel="stylesheet" href="CSS/footer.css">
         <link rel="stylesheet" href="CSS/about.css">
         <link rel="stylesheet" href="CSS/login.css">
-    <link rel="icon" type="imagens/png" href="imagens/logo.png">
+        <link rel="icon" type="imagens/png" href="imagens/logo.png">
+        <link rel="stylesheet" href="./CSS/carrinho.css">
 </head>
 
 <body>
@@ -81,18 +85,30 @@
 
                     </ul>
                 </div>
+                    <button class = "btnCarrinho" id = "btnCarrinho"><i class="bi bi-handbag-fill"></i></button>
 
             </div>
         </nav>
     </header>
 
-
     <main>
 
         <!-- Banner da empresa -->
-        <section id="inicio" class="hero-section">
-            <div class="container">
+        <section id="inicio" class="hero-section pt-5 mt-4 pb-2">
+            <div class="container pt-4 pb-2">
+                <!-- barra de pesquisa -->
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-10">
+                        <input type="text" id="inputPesquisa" class="form-control text-center shadow-sm pesquisar" placeholder="Pesquisar produtos por nome">
+                    </div>
+                </div>
+            </div>
+                <!-- onde imprime os dados -->
+            <div class="container my-4">
+                <div id="resultadoPesquisa" class="row g-4 justify-content-center"></div>
+            </div>
 
+            <div class="container">
                 <div class="row align-items-center min-vh-100">
 
                     <div class="col-lg-6 text-center text-lg-start">
@@ -506,10 +522,66 @@
         </div>
 
     </footer>
+    
+     <script>
+    <?php 
+
+        
+
+        $sqlNoIndex = "SELECT * FROM produtos LIMIT 10";
+
+        // conexao com o bd
+        $resultadoIndex = $connect->query($sqlNoIndex);
+
+        // arraay vazia para guardar os dados da besta fera
+        $produtosJSIndex = [];
+
+        if ($resultadoIndex){
+
+            // associa cada elemento enquanto rodar o while
+            while ($row = $resultadoIndex -> fetch_assoc()){
+
+                $produtosJSIndex[] = $row;
+
+            }
+        }
+        // parte para puxar os dados do login e mandar para o zap
+        $nomeUsuario = '';
+
+            if (isset($_SESSION['nome_usuario'])){
+
+                $nomeUsuario = $_SESSION['nome_usuario'];
+
+            }
+        
+        $emailUsuario = '';
+
+            if (isset($_SESSION['email_usuario'])){
+
+                $emailUsuario = $_SESSION['email_usuario'];
+
+            }
+      ?>
+        // manda os dados do cliente para o zap 
+
+        const dadosCliente = {
+
+            nome: "<?php echo $nomeUsuario; ?>",
+
+            email : "<?php echo $emailUsuario; ?>"
+
+        }   
+
+        const produtosJS = <?php echo json_encode($produtosJSIndex); ?>
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
-
+    <script src="./javascript/script.js"></script>
+    <script src="./javascript/carrinho.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./javascript/whatsap.js"></script>
+    <script src="./javascript/pesquisa.js"></script>
 </body>
 
 </html>

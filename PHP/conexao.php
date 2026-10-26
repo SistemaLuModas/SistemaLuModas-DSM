@@ -11,4 +11,12 @@
         {
             die("Erro! Erro!, não conseguimos nos conectar: " . mysqli_connect_error());
         }
+    if (!defined("CATEGORIAS")) {
+    define("CATEGORIAS", [
+        "blusas"     => "Blusas",
+        "conjuntos"  => "Conjuntos",
+        "acessorios" => "Acessórios",
+        "vestidos"   => "Vestidos",
+    ]);
+}
 ?>
