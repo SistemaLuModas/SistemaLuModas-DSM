@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/10/2026 às 19:27
+-- Tempo de geração: 26/10/2026 às 21:35
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -93,54 +93,54 @@ INSERT INTO `produtos` (`id`, `nome`, `preco`, `quantidade_estoque`, `descricao`
 (14, 'Casaco Cinza', 80.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/casaco_cinza.jpeg', 'blusas'),
 (15, 'Casaco Jeans', 79.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/casaco_jeans.jpeg', 'blusas'),
 (16, 'Casaco Marrom Lindo', 89.90, 10, 'Um casaco marrom muito lindo!', 'imagens/produtos/casaco_marrom.jpeg', 'blusas'),
-(27, 'Conjunto Preto', 67.00, 5, 'Breve descrição do produto da loja.', 'imagens/produtos/0d2947167a0c07e9.jpg', 'conjuntos'),
-(28, 'Conjunto Casual', 55.00, 7, 'Breve descrição do produto da loja.', 'imagens/produtos/91a8c3d321475176.jpg', 'conjuntos'),
-(29, 'Conjunto Fofo', 34.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/197afc20d74013e7.jpg', 'conjuntos'),
-(30, 'Conjunto Verde', 76.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/d43b7041c557ec58.jpg', 'conjuntos'),
-(31, 'Conjunto Azul', 122.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/f35cc460a8c7d8bc.jpg', 'conjuntos'),
-(32, 'Conjunto Elegante', 290.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/da4062eedcc40c08.jpg', 'conjuntos'),
-(33, 'Conjunto Marrom', 87.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/e0a9eee1fce4b12d.jpg', 'conjuntos'),
-(34, 'Conjunto Vermelho', 49.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/7ad7e5b05002516c.jpg', 'conjuntos'),
-(35, 'Conjunto Social', 45.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/0a0a63c9a9bc97d9.jpg', 'conjuntos'),
-(36, 'Conjunto Casual', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/2f8667045e52db8c.jpg', 'conjuntos'),
-(37, 'Conjunto Marrom Casual', 35.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/4131fef20dec161a.jpg', 'conjuntos'),
-(38, 'Conjunto Jens', 88.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/c5d5c597452ffc69.jpg', 'conjuntos'),
-(39, 'Conjunto Bege', 100.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/853786b8939f492d.jpg', 'conjuntos'),
-(40, 'Conjunto Rosa', 43.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/570753ea0eeb2f11.jpg', 'conjuntos'),
-(41, 'Conjunto Vermelho Cutting', 129.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/0237dc46714c09f8.jpg', 'conjuntos'),
-(42, 'Conjunto Rosa Cute', 67.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/b4440cb4d1e5eb0a.jpg', 'conjuntos'),
-(43, 'Brinco Estrela', 45.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/cec84b1bda17b5c2.jpg', 'acessorios'),
-(44, 'Brinco Duplo', 34.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/6237bb99bf7b5264.jpg', 'acessorios'),
-(45, 'Brinco Longo', 88.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/29b262e575c5ce08.jpg', 'acessorios'),
-(46, 'Brinco Borboleta', 34.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/aa2c66f8e2606390.jpg', 'acessorios'),
-(47, 'Colar Cute', 21.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/cc869042d6e1ee7d.jpg', 'acessorios'),
-(48, 'Anel', 29.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/05098805bd8b008a.jpg', 'acessorios'),
-(49, 'Colar Simples', 55.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/3149b5babbc3b504.jpg', 'acessorios'),
-(50, 'Anel de Prata', 99.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/17db9dce4ac5c0df.jpg', 'acessorios'),
-(51, 'Anel Duplo', 19.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/ce189a985826e496.jpg', 'acessorios'),
-(52, 'Anel Casual', 31.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/2bcb74fb863e6f72.jpg', 'acessorios'),
-(53, 'Pulseira', 21.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/5442b216c477d50c.jpg', 'acessorios'),
-(54, 'Pulseira Dupla', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/39fcbab6d8a23b3b.jpg', 'acessorios'),
-(55, 'Pulseira de Estrela', 78.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/cccfc0c2d2cb9357.jpg', 'acessorios'),
-(56, 'Pulseira de Prata', 55.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/655f7774a24c9892.jpg', 'acessorios'),
-(57, 'Brinco de Estrelas', 45.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/81adf90fb74d3911.jpg', 'acessorios'),
-(58, 'Colar de Estrelas', 67.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/0df171fb17e435f3.jpg', 'acessorios'),
-(59, 'Vestido Xadrez Marrom', 139.99, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/b32f7e3d993546ad.jpg', 'vestidos'),
-(60, 'Vestido Branco Pontilhado', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/f44d8d446f8fae8e.jpg', 'vestidos'),
-(61, 'Vestido Preto', 77.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/97d27876408eb70b.jpg', 'vestidos'),
-(62, 'Vestido Casual Marrom', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/45c81e13f7f650bd.jpg', 'vestidos'),
-(63, 'Vestido Verde Simples', 88.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/109cdaf85d83f2e6.jpg', 'vestidos'),
-(64, 'Tomara que Caia Preto', 55.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/52a793c977ba084f.jpg', 'vestidos'),
-(65, 'Vestido Branco Cute', 139.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/5c512dcea4c3f469.jpg', 'vestidos'),
-(66, 'Vestido Azul Fofo', 45.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/0accc05639833de6.jpg', 'vestidos'),
-(67, 'Vestido Preto com Flores', 88.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/5da1f7971fc37a9d.jpg', 'vestidos'),
-(68, 'Vestido Branco', 57.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/de4f980ae19bcd2b.jpg', 'vestidos'),
-(69, 'Vestido Branco Coquette', 120.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/308b4ba73adebb1b.jpg', 'vestidos'),
-(70, 'Vestido Azul', 140.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/88242119ffc2cb6b.jpg', 'vestidos'),
-(71, 'Vestido Preto Casual', 150.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/563812aa981ac220.jpg', 'vestidos'),
-(72, 'Vestido Bage', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/08d03224936a289d.jpg', 'vestidos'),
-(73, 'Tomara que Caia branco', 110.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/03e251148d7b3c39.jpg', 'vestidos'),
-(74, 'Vestido Preto Cutting', 200.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/a95258e79cdb6090.jpg', 'vestidos');
+(27, 'Conjunto Preto', 67.00, 5, 'Breve descrição do produto da loja.', 'imagens/produtos/b5b442f08c54ae53.jpg', 'conjuntos'),
+(28, 'Conjunto Casual', 55.00, 7, 'Breve descrição do produto da loja.', 'imagens/produtos/c4a82828ba46e915.jpg', 'conjuntos'),
+(29, 'Conjunto Fofo', 34.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/018b7326eddd32a7.jpg', 'conjuntos'),
+(30, 'Conjunto Verde', 76.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/54502d45ec9fc2d2.jpg', 'conjuntos'),
+(31, 'Conjunto Azul', 122.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/c13a48618d00855e.jpg', 'conjuntos'),
+(32, 'Conjunto Elegante', 290.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/457b1536aaa45b2e.jpg', 'conjuntos'),
+(33, 'Conjunto Marrom', 87.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/396f4fcc564c7967.jpg', 'conjuntos'),
+(34, 'Conjunto Vermelho', 49.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/0c803a92e1716d6e.jpg', 'conjuntos'),
+(35, 'Conjunto Social', 45.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/520ce3bc1f8b707a.jpg', 'conjuntos'),
+(36, 'Conjunto Casual', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/d129767c5db9f576.jpg', 'conjuntos'),
+(37, 'Conjunto Marrom Casual', 35.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/50c3672f4043448e.jpg', 'conjuntos'),
+(38, 'Conjunto Jeans', 88.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/4f31a17f56202192.jpg', 'conjuntos'),
+(39, 'Conjunto Bege', 100.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/2b35536b96c406df.jpg', 'conjuntos'),
+(40, 'Conjunto Rosa', 43.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/3a2c083c1cc01055.jpg', 'conjuntos'),
+(41, 'Conjunto Vermelho Cunt', 129.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/483aff14c7ea5ddb.jpg', 'conjuntos'),
+(43, 'Brinco Estrela', 45.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/af4ff6b50e6ec188.jpg', 'acessorios'),
+(44, 'Brinco Duplo', 34.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/67613f6e74bdf83f.jpg', 'acessorios'),
+(45, 'Brinco Longo', 88.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/a378827050c81858.jpg', 'acessorios'),
+(46, 'Brinco Borboleta', 34.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/de14dd9a8ad8258a.jpg', 'acessorios'),
+(47, 'Colar Cute', 21.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/736c6b813d75a325.jpg', 'acessorios'),
+(48, 'Anel', 29.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/156ad501a28bdf22.jpg', 'acessorios'),
+(49, 'Colar Simples', 55.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/f55be1aaedecc87c.jpg', 'acessorios'),
+(50, 'Anel de Prata', 99.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/cc091bbd720fbead.jpg', 'acessorios'),
+(51, 'Anel Duplo', 19.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/8744a270a6f36039.jpg', 'acessorios'),
+(52, 'Anel Casual', 31.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/d3e31686947e4bdb.jpg', 'acessorios'),
+(53, 'Pulseira', 21.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/afc9fffdb1820596.jpg', 'acessorios'),
+(54, 'Pulseira Dupla', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/834c256a9aa0ad83.jpg', 'acessorios'),
+(55, 'Pulseira de Estrela', 78.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/b1deeeef80c44d0d.jpg', 'acessorios'),
+(56, 'Pulseira de Prata', 55.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/d7829b3104963b36.jpg', 'acessorios'),
+(57, 'Brinco de Estrelas', 45.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/eba186311b9ec277.jpg', 'acessorios'),
+(58, 'Colar de Estrelas', 67.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/21e6f52247b934da.jpg', 'acessorios'),
+(59, 'Vestido Xadrez Marrom', 139.99, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/318ee88a4e204578.jpg', 'vestidos'),
+(60, 'Vestido Branco Pontilhado', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/cf7caf059b1cc964.jpg', 'vestidos'),
+(61, 'Vestido Preto', 77.90, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/d4fc9a0ea7bc8768.jpg', 'vestidos'),
+(62, 'Vestido Casual Marrom', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/05e2a102289a75ce.jpg', 'vestidos'),
+(63, 'Vestido Verde Simples', 88.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/9e41e177160f235b.jpg', 'vestidos'),
+(64, 'Tomara que Caia Preto', 55.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/e29f2d7af17412ff.jpg', 'vestidos'),
+(65, 'Vestido Branco Cute', 139.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/027eedb8fab81c8c.jpg', 'vestidos'),
+(66, 'Vestido Azul Fofo', 45.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/f8eaeb911822580f.jpg', 'vestidos'),
+(67, 'Vestido Preto com Flores', 88.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/17e359685b827205.jpg', 'vestidos'),
+(68, 'Vestido Branco', 57.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/00eb6885a0ead539.jpg', 'vestidos'),
+(69, 'Vestido Branco Coquette', 120.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/79684d0115be99de.jpg', 'vestidos'),
+(70, 'Vestido Azul', 140.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/d6f80f1c7925067e.jpg', 'vestidos'),
+(71, 'Vestido Preto Casual', 150.00, 0, 'Breve descrição do produto da loja.', 'imagens/produtos/c79aab30b946cf16.jpg', 'vestidos'),
+(72, 'Vestido Bege', 67.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/5a42cd9e34372b68.jpg', 'vestidos'),
+(73, 'Tomara que Caia branco', 110.99, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/eaf77951ec2aeab2.jpg', 'vestidos'),
+(74, 'Vestido Preto Cunt', 200.00, 10, 'Breve descrição do produto da loja.', 'imagens/produtos/c7305d5c6e07c8b4.jpg', 'vestidos'),
+(75, 'Conjunto Rosa Cute', 87.99, 0, '', 'imagens/produtos/da2de36bc35f06fd.jpg', 'conjuntos');
 
 -- --------------------------------------------------------
 
@@ -209,7 +209,7 @@ ALTER TABLE `itens_venda`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de tabela `vendas`
