@@ -17,6 +17,7 @@ include("./PHP/conexao.php");
 
     <!-- NÃO MEXA NISSO, FOI O QUE QUEBROU O CÓDIGO DA ULTIMA VEZ-->
         <link rel="stylesheet" href="CSS/configuracoes_globais.css">
+        <link rel="stylesheet" href="CSS/tema_escuro.css?v=20261027-2"> <!--css do tema escuro -->
         <link rel="stylesheet" href="CSS/navbar.css">
         <link rel="stylesheet" href="CSS/introducao.css">
         <link rel="stylesheet" href="CSS/highlights.css">
@@ -27,6 +28,9 @@ include("./PHP/conexao.php");
         <link rel="stylesheet" href="CSS/login.css">
         <link rel="icon" type="imagens/png" href="imagens/logo.png">
         <link rel="stylesheet" href="./CSS/carrinho.css">
+        <!-- Script da mudança de tema -->
+        <script src="./javascript/tema.js?v=20261027-2"></script>
+        <!-- O ?v= do CSS e do script do tema escuro identifica a versão pra evitar usar uma cópia antiga no cache. -->
 </head>
 
 <body>

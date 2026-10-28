@@ -328,6 +328,7 @@
     <link rel="icon" type="image/png" href="../imagens/logo.png">
     
     <link rel="stylesheet" href="../CSS/configuracoes_globais.css">
+    <link rel="stylesheet" href="../CSS/tema_escuro.css?v=20261027-2">
     <link rel="stylesheet" href="../CSS/navbar.css">
     <link rel="stylesheet" href="../CSS/introducao.css">
     <link rel="stylesheet" href="../CSS/highlights.css">
@@ -337,6 +338,7 @@
     <link rel="stylesheet" href="../CSS/about.css">
     <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/media_queries.css">
+    <script src="../javascript/tema.js?v=20261027-2"></script>
 
     <title>Admin | Lu Modas</title>
 </head>

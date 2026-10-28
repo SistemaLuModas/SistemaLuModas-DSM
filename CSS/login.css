@@ -2,29 +2,31 @@
   padding-top: 50px; 
 } 
 
+/* As cores usam variáveis globais pra funcionar nos dois temas. */
 .login_title { 
-  color: #30043f; 
+  color: var(--roxo-escuro); 
   text-align: center; 
   padding: 50px; 
 } 
 
 .caixa-login { 
-  background-color: #ffffff !important; 
-  color: #2b1a3e !important; 
+  background-color: var(--cor-superficie) !important; 
+  color: var(--texto) !important; 
   border-radius: 16px; 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important; 
 } 
 
 
 .form-control { 
-  border: 1.5px solid #e2d9f3; 
-  background-color: #fcfaff; 
+
+  border: 1.5px solid var(--cor-borda); 
+  background-color: var(--cor-superficie-secundaria); 
   transition: all 0.3s ease; 
 } 
 
 
 .form-control:focus { 
-  background-color: #ffffff; 
+  background-color: var(--cor-superficie); 
   border-color: var(--roxo-escuro); 
   box-shadow: 0 0 0 0.2rem rgba(106, 27, 154, 0.25); 
 } 

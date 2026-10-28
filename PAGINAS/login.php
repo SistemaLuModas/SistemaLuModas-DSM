@@ -52,9 +52,11 @@
         <link rel="stylesheet" href="../CSS/login.css">
         <link rel="stylesheet" href="../CSS/navbar.css">
         <link rel="stylesheet" href="../CSS/configuracoes_globais.css">
+        <link rel="stylesheet" href="../CSS/tema_escuro.css?v=20261027-2">
         <link rel="stylesheet" href="../CSS/contatos.css">
         <link rel="stylesheet" href="../CSS/introducao.css">
         <link rel="stylesheet" href="../CSS/footer.css">
+        <script src="../javascript/tema.js?v=20261027-2"></script>
 
         <link rel="icon" type="../imagens/png" href="../imagens/logo.png">
     </head>

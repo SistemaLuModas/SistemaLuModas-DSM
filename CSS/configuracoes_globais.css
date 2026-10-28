@@ -1,5 +1,5 @@
 :root { 
-  /* Paleta de cores  */
+  /* Paleta de cores tema claro */
   --roxo-principal: #681184; 
   --roxo-escuro: #43065a; 
   --roxo-claro: #8d42a3; 
@@ -7,7 +7,27 @@
   --branco: #ffffff; 
   --texto: #2f2035; 
   --cinza: #75697a; 
+  --cor-fundo: #ffffff;
+  --cor-superficie: #ffffff;
+  --cor-superficie-secundaria: #fcfaff;
+  --cor-borda: #e2d9f3;
 } 
+/* O tema escuro sobrescreve os nomes evita repetir toda a paleta nos outros CSS */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --lilas: #2b2232;
+  --texto: #f3edf6;
+  --cinza: #c0b4c8;
+  --cor-fundo: #17131b;
+  --cor-superficie: #231c29;
+  --cor-superficie-secundaria: #302638;
+  --cor-borda: #493a52;
+  --bs-body-bg: var(--cor-fundo);
+  --bs-body-color: var(--texto);
+  --bs-secondary-color: var(--cinza);
+  --bs-tertiary-bg: var(--cor-superficie-secundaria);
+  --bs-border-color: var(--cor-borda);
+}
 
 html { 
   scroll-behavior: smooth; /* Rolagem  ao clicar em links  */
@@ -18,9 +38,27 @@ body {
   margin: 0; 
   font-family: "Segoe UI", Arial, sans-serif; 
   color: var(--texto); 
-  background: var(--branco); 
+  background: var(--cor-fundo); 
   animation: aparecer 2s ease; /* Animação para carregar a página */
 } 
+
+/* Suaviza a troca de fundo e texto */
+body,
+.card,
+.carrinho-gaveta {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* largura fixa pro texto não mexer na navbar. */
+.theme-toggle {
+  display: inline-flex;
+  width: 140px;
+  min-width: 140px;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  flex: 0 0 140px;
+}
 
 /* fade-in subida */
 @keyframes aparecer { 

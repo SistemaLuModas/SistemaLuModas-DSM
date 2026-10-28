@@ -26,6 +26,7 @@ $produtos = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
 
         <!-- NÃO MEXA NISSO, FOI O QUE QUEBROU O CÓDIGO DA ULTIMA VEZ-->
         <link rel="stylesheet" href="../CSS/configuracoes_globais.css">
+        <link rel="stylesheet" href="../CSS/tema_escuro.css?v=20261027-2">
         <link rel="stylesheet" href="../CSS/navbar.css">
         <link rel="stylesheet" href="../CSS/introducao.css">
         <link rel="stylesheet" href="../CSS/highlights.css">
@@ -37,6 +38,7 @@ $produtos = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
         <link rel="stylesheet" href="../CSS/media_queries.css">
         <link rel="icon" type="image/png" href="../imagens/logo.png">
         <link rel="stylesheet" href="../CSS/carrinho.css">
+        <script src="../javascript/tema.js?v=20261027-2"></script>
     </head>
     <body>
 

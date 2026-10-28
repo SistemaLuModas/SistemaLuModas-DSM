@@ -26,7 +26,7 @@ html, body {
     height: 100vh;
     z-index: 1050;
     overflow-y: auto;
-    background-color: #ffffff;
+    background-color: var(--cor-superficie);
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -64,7 +64,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--cor-borda);
 }
 
 .carrinho-cabecalho h5 {
@@ -108,8 +108,8 @@ html, body {
 
 .carrinho-rodape {
     padding: 20px;
-    border-top: 1px solid #eee;
-    background-color: #ffffff;
+    border-top: 1px solid var(--cor-borda);
+    background-color: var(--cor-superficie);
     
     flex-shrink: 0; 
 }

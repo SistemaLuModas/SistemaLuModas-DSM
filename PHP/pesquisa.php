@@ -13,7 +13,7 @@ if (isset($_GET['termo'])) {
                 <div class="card h-100 shadow-sm border-0" style="border-radius: 18px; overflow: hidden;">
                     <img src="' . htmlspecialchars($imagem) . '" class="card-img-top" alt="' . htmlspecialchars($produto['nome']) . '" style="height: 220px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold" style="font-size: 1.1rem; color: #2f2035;">' . htmlspecialchars($produto['nome']) . '</h5>
+                        <h5 class="card-title fw-bold" style="font-size: 1.1rem; color: var(--texto);">' . htmlspecialchars($produto['nome']) . '</h5>
                         <p class="card-text text-muted" style="font-size: 0.9rem;">' . htmlspecialchars($produto['descricao']) . '</p>
                         <div class="mt-auto">
                             <span class="text-success fw-bold fs-5 d-block mb-2">R$ ' . number_format($produto['preco'], 2, ',', '.') . '</span>
