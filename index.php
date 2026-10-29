@@ -26,7 +26,7 @@ include("./PHP/conexao.php");
         <link rel="stylesheet" href="CSS/footer.css">
         <link rel="stylesheet" href="CSS/about.css">
         <link rel="stylesheet" href="CSS/login.css">
-        <link rel="icon" type="imagens/png" href="imagens/logo.png">
+        <link rel="icon" type="imagens/png" href="imagens/logo2.png">
         <link rel="stylesheet" href="./CSS/carrinho.css">
         <!-- Script da mudança de tema -->
         <script src="./javascript/tema.js?v=20261027-2"></script>

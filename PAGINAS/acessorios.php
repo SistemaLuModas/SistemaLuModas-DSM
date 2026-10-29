@@ -36,7 +36,7 @@ $produtos = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
         <link rel="stylesheet" href="../CSS/about.css">
         <link rel="stylesheet" href="../CSS/login.css">
         <link rel="stylesheet" href="../CSS/media_queries.css">
-        <link rel="icon" type="image/png" href="../imagens/logo.png">
+        <link rel="icon" type="image/png" href="../imagens/logo2.png">
         <link rel="stylesheet" href="../CSS/carrinho.css">
         <script src="../javascript/tema.js?v=20261027-2"></script>
     </head>

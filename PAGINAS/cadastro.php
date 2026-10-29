@@ -56,7 +56,7 @@
         <link rel="stylesheet" href="../CSS/footer.css">
         <script src="../javascript/tema.js?v=20261027-2"></script>
 
-        <link rel="icon" type="../imagens/png" href="../imagens/logo.png">
+        <link rel="icon" type="imagens/png" href="imagens/logo2.png">
     </head>
 
     <body>    
