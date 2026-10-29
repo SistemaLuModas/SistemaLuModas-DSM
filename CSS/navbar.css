@@ -1,14 +1,16 @@
 .navbar { 
+  height: 85px;
   background: rgba(67, 6, 90, 0.97); 
   padding: 8px 0; 
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12); 
 } 
 
 .logo { 
-  width: 145px; 
-  height: 60px; 
+  width: auto; 
+  height: 180px; 
   object-fit: contain; /* Mantém a proporção do logo sem distorcer */
   background: transparent; 
+  padding-bottom: 15px;
 } 
 
 .nav-link { 

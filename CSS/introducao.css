@@ -1,4 +1,29 @@
+#inputPesquisa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 520px;
+  width: 100%;
+  padding: 6px 6px 6px 16px;
+  border: 1px solid #e3e6ea;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: border-color .2s, box-shadow .2s;
+  position: relative;
+  z-index: 1100;
+}
+
+.hero-row {
+  min-height: 60vh;
+}
+
+#inputPesquisa:focus-within {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15);
+}
+
 .hero-section { 
+  padding-top: 110px;
   background: radial-gradient(circle at 80% 30%, rgba(255,255,255,0.12), transparent 30%), 
               linear-gradient(135deg, var(--roxo-escuro), var(--roxo-principal)); 
   color: var(--branco); 

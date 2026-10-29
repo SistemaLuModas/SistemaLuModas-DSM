@@ -34,7 +34,6 @@ include("./PHP/conexao.php");
 </head>
 
 <body>
-    <!-- ESSA É A NAVBAR, FIQUE ATENTO COM AS PASTAS PARA NÃO CAGAR TUDO -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
@@ -81,9 +80,9 @@ include("./PHP/conexao.php");
                                 <i class="bi bi-person-circle" style="color: #FFFFFF;"></i>
                                 <!-- Aqui é só pra mostrar o primeiro nome -->
                                 Olá, <strong style="color: #FFFFFF";><?php echo explode(" ", $_SESSION["nome_usuario"])[0]; ?></strong>
-                                | <a href="PAGINAS/logout.php" style="color: #aeaeae;" >Sair</a>
+                                | <a href="PAGINAS/logout.php" style="color: #aeaeae; padding-right: 20px;" >Sair</a>
                             <?php } else { ?>
-                                <a href="PAGINAS/login.php" style="color: #FFFFFF; text-decoration: none;">👤   Entre ou cadastre-se</a>
+                                <a href="PAGINAS/login.php" style="color: #FFFFFF; text-decoration: none; padding-right: 20px;">👤   Entre ou cadastre-se</a>
                             <?php } ?>
                         </li>
 
@@ -98,7 +97,7 @@ include("./PHP/conexao.php");
     <main>
 
         <!-- Banner da empresa -->
-        <section id="inicio" class="hero-section pt-5 mt-4 pb-2">
+        <section id="inicio" class="hero-section pb-2">
             <div class="container pt-4 pb-2">
                 <!-- barra de pesquisa -->
                 <div class="row justify-content-center">
@@ -113,7 +112,7 @@ include("./PHP/conexao.php");
             </div>
 
             <div class="container">
-                <div class="row align-items-center min-vh-100">
+                <div class="row align-items-center hero-row py-5">
 
                     <div class="col-lg-6 text-center text-lg-start">
 
