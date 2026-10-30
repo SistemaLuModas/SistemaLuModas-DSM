@@ -458,36 +458,7 @@ include("./PHP/conexao.php");
 
                     </div>
 
-                    <form class="contact-form mx-auto needs-validation" id="formContato" novalidate>
-
-                        <div class="row g-3 text-start">
-
-                            <div class="col-md-6">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
-                                <div class="invalid-feedback">Digite seu nome.</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="voce@email.com" required>
-                                <div class="invalid-feedback">Digite um e-mail válido.</div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="mensagem" class="form-label">Mensagem</label>
-                                <textarea class="form-control" id="mensagem" name="mensagem" rows="4" placeholder="Conte pra gente o que você procura" required></textarea>
-                                <div class="invalid-feedback">Escreva uma mensagem.</div>
-                            </div>
-
-                            <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-light btn-lg px-5">Enviar mensagem</button>
-                            </div>
-
-                        </div>
-
-                    </form>
-
+                    
                 </div>
 
             </div>
